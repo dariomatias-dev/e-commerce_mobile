@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:intl/intl.dart';
 
 import 'package:power_tech/models/product_card_model.dart';
@@ -18,6 +19,10 @@ class ProductCardWidget extends StatelessWidget {
     String formattedPrice = realFormat.format(price);
 
     return Card(
+      elevation: 5,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(16),
+      ),
       child: Container(
         width: 150,
         padding: const EdgeInsets.symmetric(
@@ -25,8 +30,7 @@ class ProductCardWidget extends StatelessWidget {
           horizontal: 10,
         ),
         child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Stack(
               children: [
@@ -37,9 +41,15 @@ class ProductCardWidget extends StatelessWidget {
                       margin: const EdgeInsets.symmetric(
                         vertical: 10,
                       ),
-                      child: Image.asset(
-                        "assets/images/notebook.png",
-                        width: 100,
+                      child: ConstrainedBox(
+                        constraints: const BoxConstraints(
+                          minHeight: 90,
+                          maxHeight: 120,
+                        ),
+                        child: Image.network(
+                          "${dotenv.env["IMAGE_URL"]}/${productCard.imageUrlId}.jpg",
+                          width: 100,
+                        ),
                       ),
                     ),
                   ),

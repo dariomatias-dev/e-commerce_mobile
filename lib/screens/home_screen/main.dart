@@ -18,12 +18,7 @@ class _HomeScreenState extends State<HomeScreen> {
         backgroundColor: Colors.black,
       ),
       drawer: const CustomDrawer(),
-      body: Container(
-        margin: EdgeInsets.only(
-          top: MediaQuery.of(context).size.height/ 2 - 150,
-        ),
-        child: const SectionProducts(),
-      ),
+      body: const SectionProducts(),
     );
   }
 }

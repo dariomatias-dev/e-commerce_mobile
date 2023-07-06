@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'dart:developer' as developer;
 import 'dart:convert';
 
@@ -75,13 +74,27 @@ class _SectionProductsState extends State<SectionProducts> {
           return const CircularProgressIndicator();
         }
 
-        return ListView(
-          scrollDirection: Axis.horizontal,
-          children: value.productsCard.map((e) {
-            return ProductCardWidget(
-              productCard: e,
-            );
-          }).toList(),
+        return Container(
+          height: 250,
+          margin: const EdgeInsets.symmetric(
+            vertical: 16,
+          ),
+          child: ListView.separated(
+            scrollDirection: Axis.horizontal,
+            itemCount: value.productsCard.length + 1,
+            itemBuilder: (context, index) {
+              if (index == 0 || index == value.productsCard.length + 1) {
+                return const SizedBox(width: 2);
+              }
+
+              return ProductCardWidget(
+                productCard: value.productsCard[index - 1],
+              );
+            },
+            separatorBuilder: (context, index) {
+              return const SizedBox(width: 10);
+            },
+          ),
         );
       },
     );
