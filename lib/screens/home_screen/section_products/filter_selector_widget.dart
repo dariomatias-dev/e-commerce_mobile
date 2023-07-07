@@ -8,12 +8,11 @@ class FilterSelectorWidget extends StatefulWidget {
 }
 
 List<String> names = [
-  "Maria",
-  "Carlos",
-  "Alice",
-  "Joana",
-  "Sofia",
-  "Bernado",
+  "Menor preço",
+  "Maior preço",
+  "Promoções",
+  "Mais procurados",
+  "Mais avaliados",
 ];
 
 class _FilterSelectorWidgetState extends State<FilterSelectorWidget> {

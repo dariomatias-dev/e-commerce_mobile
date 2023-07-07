@@ -16,7 +16,7 @@ class SectionProducts extends StatefulWidget {
 }
 
 class _SectionProductsState extends State<SectionProducts> {
-  APIServices apiServices = APIServices();
+  final APIServices apiServices = APIServices();
   final ValueNotifier<ProductsCardNavigation?> productsCardNavigation =
       ValueNotifier<ProductsCardNavigation?>(null);
   int amountOfProducts = 0;
