@@ -36,7 +36,9 @@ class ProductCardWidget extends StatelessWidget {
               children: [
                 Center(
                   child: InkWell(
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.pushNamed(context, "product");
+                    },
                     child: Container(
                       margin: const EdgeInsets.symmetric(
                         vertical: 10,

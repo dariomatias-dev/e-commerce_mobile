@@ -3,7 +3,8 @@ import 'dart:developer' as developer;
 import 'dart:convert';
 
 import 'package:power_tech/models/products_card_navigation_model.dart';
-import 'package:power_tech/screens/home_screen/section_products/product_card_widget.dart';
+import 'package:power_tech/screens/home_screen/section_products/filter_selector_widget.dart';
+import 'package:power_tech/screens/home_screen/section_products/products_widget.dart';
 
 import 'package:power_tech/services/api_services.dart';
 
@@ -24,10 +25,10 @@ class _SectionProductsState extends State<SectionProducts> {
   @override
   void initState() {
     super.initState();
-    fetchDatas();
+    initFecths();
   }
 
-  Future<void> fetchDatas() async {
+  Future<void> initFecths() async {
     await getAmountOfProducts();
     fetchData(0);
   }
@@ -61,42 +62,44 @@ class _SectionProductsState extends State<SectionProducts> {
         "An excess occurred: $err",
         error: err,
       );
-      throw Exception("Failed to fetch data");
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    return ValueListenableBuilder(
-      valueListenable: productsCardNavigation,
-      builder: (context, value, child) {
-        if (value == null) {
-          return const CircularProgressIndicator();
-        }
-
-        return Container(
-          height: 250,
+    return Column(
+      children: [
+        Container(
           margin: const EdgeInsets.symmetric(
-            vertical: 16,
+            horizontal: 6,
           ),
-          child: ListView.separated(
-            scrollDirection: Axis.horizontal,
-            itemCount: value.productsCard.length + 1,
-            itemBuilder: (context, index) {
-              if (index == 0 || index == value.productsCard.length + 1) {
-                return const SizedBox(width: 2);
-              }
+          child: const Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                "Produtos",
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              FilterSelectorWidget(),
+            ],
+          ),
+        ),
+        ValueListenableBuilder(
+          valueListenable: productsCardNavigation,
+          builder: (context, value, child) {
+            if (value == null) {
+              return const CircularProgressIndicator();
+            }
 
-              return ProductCardWidget(
-                productCard: value.productsCard[index - 1],
-              );
-            },
-            separatorBuilder: (context, index) {
-              return const SizedBox(width: 10);
-            },
-          ),
-        );
-      },
+            return ProductsWidget(
+              productsCard: value.productsCard,
+            );
+          },
+        ),
+      ],
     );
   }
 }
