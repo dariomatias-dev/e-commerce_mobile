@@ -8,7 +8,7 @@ import 'package:power_tech/services/api_services.dart';
 
 import 'package:power_tech/screens/product_screen/header_widget.dart';
 import 'package:power_tech/screens/product_screen/carousel_images_widget.dart';
-import 'package:power_tech/screens/product_screen/details_widget.dart';
+import 'package:power_tech/screens/product_screen/details_widget/main.dart';
 import 'package:power_tech/screens/product_screen/bottomnavigationbar_product_widget.dart';
 
 class ProductScreen extends StatefulWidget {

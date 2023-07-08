@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:power_tech/screens/product_screen/details_widget/price_options_widget.dart';
 
 class DetailsWidget extends StatelessWidget {
   const DetailsWidget({
@@ -89,7 +90,7 @@ class DetailsWidget extends StatelessWidget {
                     ),
                     const SizedBox(width: 6),
                     const Text(
-                      "4",
+                      "1",
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w500,
@@ -123,82 +124,8 @@ class DetailsWidget extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 10),
-          Container(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 12,
-              vertical: 16,
-            ),
-            decoration: BoxDecoration(
-              color: Colors.grey.withOpacity(0.08),
-              borderRadius: BorderRadius.circular(10),
-            ),
-            child: const Column(
-              children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      "de R\$ 1.1011,56 por:",
-                      style: TextStyle(
-                        color: Colors.red,
-                        fontSize: 12,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Flexible(
-                          child: Text(
-                            "No PIX com 15% de desconto",
-                            softWrap: true,
-                            style: TextStyle(
-                              fontSize: 12,
-                            ),
-                          ),
-                        ),
-                        SizedBox(width: 10),
-                        Text(
-                          "R\$ 779,90",
-                          style: TextStyle(
-                            color: Colors.green,
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-                Divider(
-                  color: Colors.black54,
-                  height: 26,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Flexible(
-                      child: Text(
-                        "em 12x de R\$76,46 (sem juros) no cartão:",
-                        softWrap: true,
-                        style: TextStyle(
-                          fontSize: 12,
-                        ),
-                      ),
-                    ),
-                    SizedBox(width: 10),
-                    Text(
-                      "R\$ 917,53",
-                      style: TextStyle(
-                        color: Colors.red,
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
+          PriceOptionsWidget(
+            price: price,
           ),
         ],
       ),

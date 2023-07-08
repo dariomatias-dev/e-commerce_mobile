@@ -1,10 +1,8 @@
 import 'package:intl/intl.dart';
 
-String formatToReal(value) {
+String formatToReal(double price) {
   NumberFormat realFormat =
       NumberFormat.currency(locale: "pt_BR", symbol: "R\$");
-
-  double price = double.parse(value);
 
   return realFormat.format(price);
 }

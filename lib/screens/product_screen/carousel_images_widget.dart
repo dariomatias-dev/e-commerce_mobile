@@ -18,7 +18,6 @@ class CarouselImagesWidget extends StatelessWidget {
       child: FlutterCarousel.builder(
         itemCount: imageUrlIds.length,
         options: CarouselOptions(
-          height: double.maxFinite,
           autoPlay: true,
           autoPlayAnimationDuration: const Duration(
             seconds: 1,
@@ -26,8 +25,8 @@ class CarouselImagesWidget extends StatelessWidget {
           autoPlayInterval: const Duration(
             seconds: 4,
           ),
-          showIndicator: true,
           indicatorMargin: 1,
+          showIndicator: true,
           slideIndicator: CircularStaticIndicator(
             currentIndicatorColor: Colors.black,
             indicatorBackgroundColor: Colors.black.withOpacity(0.1),
