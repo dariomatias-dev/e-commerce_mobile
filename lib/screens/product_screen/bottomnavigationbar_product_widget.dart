@@ -9,18 +9,21 @@ class BottomNavigationBarProductWidget extends StatelessWidget {
       margin: const EdgeInsets.fromLTRB(30, 0, 30, 24),
       child: Row(
         children: [
-          GestureDetector(
-            onTap: () {},
-            child: Tooltip(
-              message: "Carrinho",
-              child: Container(
-                width: 50,
-                height: 50,
-                decoration: BoxDecoration(
-                  border: Border.all(),
-                  shape: BoxShape.circle,
+          MouseRegion(
+            cursor: SystemMouseCursors.click,
+            child: GestureDetector(
+              onTap: () {},
+              child: Tooltip(
+                message: "Carrinho",
+                child: Container(
+                  width: 50,
+                  height: 50,
+                  decoration: BoxDecoration(
+                    border: Border.all(),
+                    shape: BoxShape.circle,
+                  ),
+                  child: const Icon(Icons.shopping_cart),
                 ),
-                child: const Icon(Icons.shopping_cart),
               ),
             ),
           ),
