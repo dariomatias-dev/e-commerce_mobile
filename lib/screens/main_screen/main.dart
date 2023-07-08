@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:power_tech/screens/home_screen/main.dart';
 
-import 'package:power_tech/widgets/custom_drawer_widget/main.dart';
+import 'package:power_tech/screens/main_screen/custom_drawer_widget/main.dart';
 import 'package:power_tech/screens/main_screen/custom_bottomnavigationbar_widget.dart';
 
 class MainScreen extends StatefulWidget {

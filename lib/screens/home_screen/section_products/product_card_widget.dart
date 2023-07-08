@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:intl/intl.dart';
 
 import 'package:power_tech/models/product_card_model.dart';
+import 'package:power_tech/screens/product_screen/main.dart';
+import 'package:power_tech/utils/format_to_real.dart';
 
 class ProductCardWidget extends StatelessWidget {
   const ProductCardWidget({super.key, required this.productCard});
@@ -11,12 +12,7 @@ class ProductCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    NumberFormat realFormat =
-        NumberFormat.currency(locale: "pt_BR", symbol: "R\$");
-
-    double price = double.parse(productCard.price);
-
-    String formattedPrice = realFormat.format(price);
+    final String formattedPrice = formatToReal(productCard.price);
 
     return Card(
       elevation: 5,
@@ -37,12 +33,15 @@ class ProductCardWidget extends StatelessWidget {
                 Center(
                   child: InkWell(
                     onTap: () {
-                      Navigator.pushNamed(
+                      Navigator.push(
                         context,
-                        "product",
-                        arguments: {
-                          "productId": productCard.id,
-                        },
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return ProductScreen(
+                              productId: productCard.id,
+                            );
+                          },
+                        ),
                       );
                     },
                     child: Container(
