@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:power_tech/screens/home_screen/main.dart';
 
-import 'package:power_tech/screens/main_screen/custom_drawer_widget/main.dart';
-import 'package:power_tech/screens/main_screen/custom_bottomnavigationbar_widget.dart';
+import 'package:power_tech/screens/main_screen/drawer_widget/main.dart';
+import 'package:power_tech/screens/main_screen/bottomnavigationbar_main_widget.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -18,9 +18,33 @@ class _MainScreenState extends State<MainScreen> {
 
   final List<Widget> _screens = [
     const HomeScreen(),
-    const Text("Favoritos"),
-    const Text("Carrinho"),
-    const Text("Configurações"),
+    const Center(
+      child: Text(
+        "Favoritos",
+        style: TextStyle(
+          fontSize: 20,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+    ),
+    const Center(
+      child: Text(
+        "Carrinho",
+        style: TextStyle(
+          fontSize: 20,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+    ),
+    const Center(
+      child: Text(
+        "Configurações",
+        style: TextStyle(
+          fontSize: 20,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+    ),
   ];
 
   void onTabSelector(int index) {
@@ -45,12 +69,12 @@ class _MainScreenState extends State<MainScreen> {
         ),
         backgroundColor: Colors.black,
       ),
-      drawer: const CustomDrawer(),
+      drawer: const DrawerWidget(),
       body: IndexedStack(
         index: _selectedTab,
         children: _screens,
       ),
-      bottomNavigationBar: CustomBottomNavigationBar(
+      bottomNavigationBar: BottomNavigationBarMainWidget(
         onTabSelector: onTabSelector,
       ),
     );

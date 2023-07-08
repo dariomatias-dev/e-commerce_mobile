@@ -18,7 +18,7 @@ class MainApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: "Power Tech App",
       theme: ThemeData(
-        canvasColor: const Color.fromARGB(255, 245, 245, 245),
+        canvasColor: const Color.fromARGB(255, 250, 250, 250),
       ),
       initialRoute: "/",
       routes: {

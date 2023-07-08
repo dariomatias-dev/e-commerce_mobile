@@ -8,7 +8,7 @@ import 'package:power_tech/utils/format_to_real.dart';
 class ProductCardWidget extends StatelessWidget {
   const ProductCardWidget({super.key, required this.productCard});
 
-  final ProductCard productCard;
+  final ProductCardModel productCard;
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +31,7 @@ class ProductCardWidget extends StatelessWidget {
             Stack(
               children: [
                 Center(
-                  child: InkWell(
+                  child: GestureDetector(
                     onTap: () {
                       Navigator.push(
                         context,
@@ -79,10 +79,13 @@ class ProductCardWidget extends StatelessWidget {
                           ),
                         ],
                       ),
-                      child: const Icon(
-                        Icons.favorite_outline,
-                        color: Colors.white54,
-                        size: 20,
+                      child: const Tooltip(
+                        message: "Favorito",
+                        child: Icon(
+                          Icons.favorite_outline,
+                          color: Colors.white54,
+                          size: 20,
+                        ),
                       ),
                     ),
                     onTap: () {},

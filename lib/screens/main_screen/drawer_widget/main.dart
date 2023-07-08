@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-import 'package:power_tech/screens/main_screen/custom_drawer_widget/main_navigation.dart';
-import 'package:power_tech/screens/main_screen/custom_drawer_widget/other_options.dart';
+import 'package:power_tech/screens/main_screen/drawer_widget/main_navigation.dart';
+import 'package:power_tech/screens/main_screen/drawer_widget/other_options.dart';
 
-class CustomDrawer extends StatelessWidget {
-  const CustomDrawer({super.key});
+class DrawerWidget extends StatelessWidget {
+  const DrawerWidget({super.key});
 
   @override
   Widget build(BuildContext context) {

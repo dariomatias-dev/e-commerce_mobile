@@ -7,15 +7,12 @@ import 'package:power_tech/screens/home_screen/section_products/product_card_wid
 class ProductsWidget extends StatelessWidget {
   const ProductsWidget({super.key, required this.productsCard});
 
-  final List<ProductCard> productsCard;
+  final List<ProductCardModel> productsCard;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: 250,
-      margin: const EdgeInsets.symmetric(
-        vertical: 16,
-      ),
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         itemCount: productsCard.length * 2 + 1,
@@ -27,7 +24,7 @@ class ProductsWidget extends StatelessWidget {
           }
 
           return ProductCardWidget(
-            productCard: productsCard[(index/ 2).floor()],
+            productCard: productsCard[(index / 2).floor()],
           );
         },
       ),

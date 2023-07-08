@@ -1,17 +1,17 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class CustomBottomNavigationBar extends StatefulWidget {
-  const CustomBottomNavigationBar({super.key, required this.onTabSelector});
+class BottomNavigationBarMainWidget extends StatefulWidget {
+  const BottomNavigationBarMainWidget({super.key, required this.onTabSelector});
 
   final Function(int) onTabSelector;
 
   @override
-  State<CustomBottomNavigationBar> createState() =>
-      _CustomBottomNavigationBarState();
+  State<BottomNavigationBarMainWidget> createState() =>
+      _BottomNavigationBarStateWidget();
 }
 
-class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
+class _BottomNavigationBarStateWidget extends State<BottomNavigationBarMainWidget> {
   final List<IconData> _icons = [
     Icons.home,
     Icons.favorite_border,

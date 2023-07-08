@@ -29,8 +29,12 @@ class _FilterSelectorWidgetState extends State<FilterSelectorWidget> {
     return DropdownButtonHideUnderline(
       child: DropdownButton(
         value: dropdownValue,
-        onChanged: (value) => setDropdownValue(value as String),
-        underline: const SizedBox(),
+        onChanged: (value) {
+          setDropdownValue(value as String);
+
+          FocusScope.of(context).requestFocus(FocusNode());
+        },
+        dropdownColor: Colors.white,
         items: names.map((e) {
           return DropdownMenuItem(
             value: e,

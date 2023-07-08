@@ -1,22 +1,22 @@
 import 'package:power_tech/models/product_card_model.dart';
 
-class ProductsCardNavigation {
+class ProductsCardNavigationModel {
   final int skip;
   final int take;
-  final List<ProductCard> productsCard;
+  final List<ProductCardModel> productsCard;
 
-  ProductsCardNavigation({
+  ProductsCardNavigationModel({
     required this.skip,
     required this.take,
     required this.productsCard,
   });
 
-  factory ProductsCardNavigation.fromMap(Map<String, dynamic> map) {
-    return ProductsCardNavigation(
+  factory ProductsCardNavigationModel.fromMap(Map<String, dynamic> map) {
+    return ProductsCardNavigationModel(
       skip: map["skip"] ?? "",
       take: map["take"] ?? "",
       productsCard: (map["products"] as List).map((productCard) {
-        return ProductCard.fromMap(productCard);
+        return ProductCardModel.fromMap(productCard);
       }).toList(),
     );
   }

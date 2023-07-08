@@ -17,8 +17,8 @@ class SectionProducts extends StatefulWidget {
 
 class _SectionProductsState extends State<SectionProducts> {
   final APIServices apiServices = APIServices();
-  final ValueNotifier<ProductsCardNavigation?> productsCardNavigation =
-      ValueNotifier<ProductsCardNavigation?>(null);
+  final ValueNotifier<ProductsCardNavigationModel?> productsCardNavigation =
+      ValueNotifier<ProductsCardNavigationModel?>(null);
   int amountOfProducts = 0;
   bool enableLoadMoreButton = true;
 
@@ -50,8 +50,8 @@ class _SectionProductsState extends State<SectionProducts> {
       var result = await apiServices.fetchData("products?skip=$skip");
       Map<String, dynamic> data = jsonDecode(result);
 
-      ProductsCardNavigation productsCardNavigationData =
-          ProductsCardNavigation.fromMap(data);
+      ProductsCardNavigationModel productsCardNavigationData =
+          ProductsCardNavigationModel.fromMap(data);
       setState(() {
         productsCardNavigation.value = productsCardNavigationData;
         enableLoadMoreButton =
@@ -71,7 +71,7 @@ class _SectionProductsState extends State<SectionProducts> {
       children: [
         Container(
           margin: const EdgeInsets.symmetric(
-            horizontal: 6,
+            horizontal: 10,
           ),
           child: const Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -79,7 +79,7 @@ class _SectionProductsState extends State<SectionProducts> {
               Text(
                 "Produtos",
                 style: TextStyle(
-                  fontSize: 18,
+                  fontSize: 20,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -87,6 +87,7 @@ class _SectionProductsState extends State<SectionProducts> {
             ],
           ),
         ),
+        const SizedBox(height: 2),
         ValueListenableBuilder(
           valueListenable: productsCardNavigation,
           builder: (context, value, child) {
