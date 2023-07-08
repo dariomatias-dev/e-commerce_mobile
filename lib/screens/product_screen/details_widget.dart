@@ -19,7 +19,10 @@ class DetailsWidget extends StatelessWidget {
     final String formattedPrice = formatToReal(price);
 
     return Padding(
-      padding: const EdgeInsets.all(30),
+      padding: const EdgeInsets.symmetric(
+        horizontal: 30,
+        vertical: 16,
+      ),
       child: Column(
         children: [
           Row(
@@ -30,7 +33,8 @@ class DetailsWidget extends StatelessWidget {
                   name,
                   softWrap: true,
                   style: const TextStyle(
-                    fontSize: 20,
+                    color: Colors.black87,
+                    fontSize: 18,
                     fontWeight: FontWeight.w700,
                   ),
                 ),
@@ -39,13 +43,13 @@ class DetailsWidget extends StatelessWidget {
               Text(
                 formattedPrice,
                 style: const TextStyle(
-                  fontSize: 20,
+                  fontSize: 18,
                   fontWeight: FontWeight.bold,
                 ),
               ),
             ],
           ),
-          const SizedBox(height: 10),
+          const SizedBox(height: 12),
           Text(
             description,
             textAlign: TextAlign.justify,

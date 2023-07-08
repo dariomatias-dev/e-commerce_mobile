@@ -9,10 +9,10 @@ class HeaderWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.only(
-        top: 30,
-        right: 20,
-        bottom: 20,
-        left: 20,
+        top: 16,
+        right: 12,
+        bottom: 10,
+        left: 12,
       ),
       decoration: const BoxDecoration(
         color: Colors.white,
@@ -26,25 +26,34 @@ class HeaderWidget extends StatelessWidget {
               onTap: () {
                 Navigator.pop(context);
               },
-              child: const Icon(
-                Icons.arrow_back_rounded,
-                size: 24,
+              child: Container(
+                padding: const EdgeInsets.all(7),
+                decoration: BoxDecoration(
+                  border: Border.all(
+                    width: 0.5,
+                    color: Colors.grey.shade400.withOpacity(0.9),
+                  ),
+                  shape: BoxShape.circle,
+                ),
+                child: Icon(
+                  Icons.arrow_back_rounded,
+                  size: 20,
+                  color: Colors.grey.shade600,
+                ),
               ),
             ),
           ),
           const Text(
             "Detalhes",
             style: TextStyle(
-              color: Colors.black87,
-              fontSize: 15,
+              fontSize: 16,
               fontWeight: FontWeight.w500,
             ),
           ),
           GestureDetector(
             onTap: () {},
             child: Container(
-              width: 32,
-              height: 32,
+              padding: const EdgeInsets.all(7),
               decoration: const BoxDecoration(
                 color: Colors.black,
                 shape: BoxShape.circle,

@@ -1,5 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 
 class BottomNavigationBarMainWidget extends StatefulWidget {
   const BottomNavigationBarMainWidget({super.key, required this.onTabSelector});
@@ -8,10 +8,10 @@ class BottomNavigationBarMainWidget extends StatefulWidget {
 
   @override
   State<BottomNavigationBarMainWidget> createState() =>
-      _BottomNavigationBarStateWidget();
+      _BottomNavigationBarMainStateWidget();
 }
 
-class _BottomNavigationBarStateWidget extends State<BottomNavigationBarMainWidget> {
+class _BottomNavigationBarMainStateWidget extends State<BottomNavigationBarMainWidget> {
   final List<IconData> _icons = [
     Icons.home,
     Icons.favorite_border,

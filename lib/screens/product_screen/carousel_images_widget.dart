@@ -13,22 +13,7 @@ class CarouselImagesWidget extends StatelessWidget {
     return Container(
       height: 300,
       padding: const EdgeInsets.only(
-        top: 20,
-        bottom: 40,
-      ),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: const BorderRadius.only(
-          bottomRight: Radius.circular(40),
-          bottomLeft: Radius.circular(40),
-        ),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.2),
-            blurRadius: 20,
-            offset: const Offset(0, 18),
-          ),
-        ],
+        top: 30,
       ),
       child: FlutterCarousel.builder(
         itemCount: imageUrlIds.length,
@@ -45,6 +30,7 @@ class CarouselImagesWidget extends StatelessWidget {
           indicatorMargin: 1,
           slideIndicator: CircularStaticIndicator(
             currentIndicatorColor: Colors.black,
+            indicatorBackgroundColor: Colors.black.withOpacity(0.1),
           ),
         ),
         itemBuilder: (context, index, realIndex) {
