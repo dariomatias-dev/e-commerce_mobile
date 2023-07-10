@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:power_tech/models/product_card_model.dart';
 import 'dart:developer' as developer;
 import 'dart:convert';
 
@@ -20,23 +21,24 @@ class _SectionProductsState extends State<SectionProducts> {
   final ValueNotifier<ProductsCardNavigationModel?> productsCardNavigation =
       ValueNotifier<ProductsCardNavigationModel?>(null);
   int amountOfProducts = 0;
-  bool enableLoadMoreButton = true;
+
+  final ScrollController scrollController = ScrollController();
 
   @override
   void initState() {
     super.initState();
-    initFecths();
+    initFetchs();
   }
 
-  Future<void> initFecths() async {
-    await getAmountOfProducts();
+  Future<void> initFetchs() async {
+    await fetchQuantityProducts();
     fetchData(0);
   }
 
-  Future<void> getAmountOfProducts() async {
+  Future<void> fetchQuantityProducts() async {
     try {
-      var data = await apiServices.fetchData("products-amount");
-      amountOfProducts = jsonDecode(data);
+      var result = await apiServices.fetchData("products-amount");
+      amountOfProducts = int.parse(result);
     } catch (err) {
       developer.log(
         "An excess occurred: $err",
@@ -50,12 +52,29 @@ class _SectionProductsState extends State<SectionProducts> {
       var result = await apiServices.fetchData("products?skip=$skip");
       Map<String, dynamic> data = jsonDecode(result);
 
-      ProductsCardNavigationModel productsCardNavigationData =
+      final ProductsCardNavigationModel productsCardNavigationData =
           ProductsCardNavigationModel.fromMap(data);
+
+      late final List<ProductCardModel> productsCard;
+
+      if (productsCardNavigation.value == null) {
+        productsCard = productsCardNavigationData.productsCard;
+      } else {
+        productsCard = [
+          ...productsCardNavigation.value!.productsCard,
+          ...productsCardNavigationData.productsCard
+        ];
+      }
+
+      final ProductsCardNavigationModel newProductsCardNavigation =
+          ProductsCardNavigationModel(
+        skip: productsCardNavigationData.skip,
+        take: productsCardNavigationData.take,
+        productsCard: productsCard,
+      );
+
       setState(() {
-        productsCardNavigation.value = productsCardNavigationData;
-        enableLoadMoreButton =
-            !(productsCardNavigationData.skip >= amountOfProducts);
+        productsCardNavigation.value = newProductsCardNavigation;
       });
     } catch (err) {
       developer.log(
@@ -63,6 +82,10 @@ class _SectionProductsState extends State<SectionProducts> {
         error: err,
       );
     }
+  }
+
+  void loadMoreProducts() {
+    fetchData(productsCardNavigation.value!.skip);
   }
 
   @override
@@ -97,6 +120,9 @@ class _SectionProductsState extends State<SectionProducts> {
 
             return ProductsWidget(
               productsCard: value.productsCard,
+              scrollController: scrollController,
+              fetchData: loadMoreProducts,
+              conditionToSkip: value.skip - 10 < amountOfProducts,
             );
           },
         ),
