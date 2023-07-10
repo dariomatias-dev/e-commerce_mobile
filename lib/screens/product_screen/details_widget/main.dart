@@ -18,7 +18,7 @@ class DetailsWidget extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(
         horizontal: 30,
-        vertical: 16,
+        vertical: 20,
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

@@ -39,7 +39,7 @@ class _PaymentCalculatorWidgetState extends State<PaymentCalculatorWidget> {
           increaseAmountProduct: increaseAmountProduct,
           decreaseAmountProduct: decreaseAmountProduct,
         ),
-        const SizedBox(height: 10),
+        const SizedBox(height: 16),
         PriceOptionsWidget(
           price: widget.price,
           productQuantity: productQuantity,

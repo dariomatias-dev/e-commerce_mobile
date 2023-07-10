@@ -37,8 +37,15 @@ class _PriceOptionsWidgetState extends State<PriceOptionsWidget> {
         vertical: 16,
       ),
       decoration: BoxDecoration(
-        color: Colors.grey.withOpacity(0.08),
+        color: Colors.white,
         borderRadius: BorderRadius.circular(10),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.shade400.withOpacity(0.2),
+            spreadRadius: 2,
+            blurRadius: 12,
+          ),
+        ],
       ),
       child: Column(
         children: [

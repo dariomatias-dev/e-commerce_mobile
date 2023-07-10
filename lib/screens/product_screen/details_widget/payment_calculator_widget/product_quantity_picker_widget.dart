@@ -27,8 +27,15 @@ class _ProductQuantityPickerWidgetState
         vertical: 8,
       ),
       decoration: BoxDecoration(
-        color: Colors.grey.withOpacity(0.08),
+        color: Colors.white,
         borderRadius: BorderRadius.circular(10),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.shade400.withOpacity(0.2),
+            spreadRadius: 2,
+            blurRadius: 12,
+          ),
+        ],
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -49,7 +56,7 @@ class _ProductQuantityPickerWidgetState
                 icon: Icons.remove,
                 function: widget.decreaseAmountProduct,
               ),
-              const SizedBox(width: 8),
+              const SizedBox(width: 10),
               Text(
                 "${widget.productQuantity}",
                 style: const TextStyle(
@@ -57,7 +64,7 @@ class _ProductQuantityPickerWidgetState
                   fontWeight: FontWeight.w500,
                 ),
               ),
-              const SizedBox(width: 8),
+              const SizedBox(width: 10),
               ButtonWidget(
                 icon: Icons.add,
                 function: widget.increaseAmountProduct,
@@ -89,11 +96,15 @@ class ButtonWidget extends StatelessWidget {
         decoration: BoxDecoration(
           color: Colors.white,
           shape: BoxShape.circle,
+          border: Border.all(
+            color: Colors.grey.shade300,
+            width: 0.5,
+          ),
           boxShadow: [
             BoxShadow(
-              color: Colors.grey.withOpacity(0.5),
-              spreadRadius: 1,
-              blurRadius: 2,
+              color: Colors.grey.shade400.withOpacity(0.5),
+              spreadRadius: 4,
+              blurRadius: 12,
             ),
           ],
         ),
