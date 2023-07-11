@@ -69,6 +69,7 @@ class _ProductScreenState extends State<ProductScreen> {
                     imageUrlIds: value.imageUrlIds,
                   ),
                   DetailsWidget(
+                    productId: value.id,
                     name: value.name,
                     price: value.price,
                     description: value.description,

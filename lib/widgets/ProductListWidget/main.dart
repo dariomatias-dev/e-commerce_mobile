@@ -12,10 +12,14 @@ import 'package:power_tech/widgets/ProductListWidget/products_widget.dart';
 class ProductListWidget extends StatefulWidget {
   const ProductListWidget({
     super.key,
-    required this.urlName,
+    required this.routeName,
+    this.productId,
+    this.categoryIds,
   });
 
-  final String urlName;
+  final String routeName;
+  final String? productId;
+  final String? categoryIds;
 
   @override
   State<ProductListWidget> createState() => _ProductListWidgetState();
@@ -42,8 +46,11 @@ class _ProductListWidgetState extends State<ProductListWidget> {
 
   Future<void> fetchQuantityProducts() async {
     try {
-      var result = await apiServices
-          .fetchData("${widget.urlName}-amount");
+      final String categoryIdsParam = widget.productId != null
+          ? "?productId=${widget.productId}&categoryIds=${widget.categoryIds}"
+          : "";
+      final String url = "${widget.routeName}/amount$categoryIdsParam";
+      var result = await apiServices.fetchData(url);
       amountOfProducts = int.parse(result);
     } catch (err) {
       developer.log(
@@ -55,8 +62,11 @@ class _ProductListWidgetState extends State<ProductListWidget> {
 
   Future<void> fetchData(int skip) async {
     try {
-      var result =
-          await apiServices.fetchData("${widget.urlName}?skip=$skip");
+      final String categoryIdsParam = widget.productId != null
+          ? "&productId=${widget.productId}&categoryIds=${widget.categoryIds}"
+          : "";
+      final String url = "${widget.routeName}?skip=$skip$categoryIdsParam";
+      var result = await apiServices.fetchData(url);
       Map<String, dynamic> data = jsonDecode(result);
 
       final ProductsCardNavigationModel productsCardNavigationData =

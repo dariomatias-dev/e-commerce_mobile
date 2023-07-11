@@ -5,12 +5,14 @@ import 'package:power_tech/screens/product_screen/details_widget/similar_product
 class DetailsWidget extends StatelessWidget {
   const DetailsWidget({
     super.key,
+    required this.productId,
     required this.name,
     required this.price,
     required this.description,
     required this.categoryIds,
   });
 
+  final String productId;
   final String name;
   final String price;
   final String description;
@@ -54,6 +56,7 @@ class DetailsWidget extends StatelessWidget {
             height: 40,
           ),
           SimilarProductsWidget(
+            productId: productId,
             categoryIds: categoryIds,
           ),
         ],

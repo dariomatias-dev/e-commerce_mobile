@@ -14,7 +14,7 @@ class SectionProducts extends StatefulWidget {
 class _SectionProductsState extends State<SectionProducts> {
   @override
   Widget build(BuildContext context) {
-    const String urlName = "products";
+    const String routeName = "products";
 
     return Column(
       children: [
@@ -38,7 +38,7 @@ class _SectionProductsState extends State<SectionProducts> {
         ),
         const SizedBox(height: 2),
         const ProductListWidget(
-          urlName: urlName,
+          routeName: routeName,
         ),
       ],
     );
