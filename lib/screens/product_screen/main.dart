@@ -72,6 +72,7 @@ class _ProductScreenState extends State<ProductScreen> {
                     name: value.name,
                     price: value.price,
                     description: value.description,
+                    categoryIds: value.categoryIds,
                   ),
                 ],
               ),

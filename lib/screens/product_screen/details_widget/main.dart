@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:power_tech/screens/product_screen/details_widget/payment_calculator_widget/main.dart';
+import 'package:power_tech/screens/product_screen/details_widget/similar_products_widget.dart';
 
 class DetailsWidget extends StatelessWidget {
   const DetailsWidget({
@@ -7,11 +8,13 @@ class DetailsWidget extends StatelessWidget {
     required this.name,
     required this.price,
     required this.description,
+    required this.categoryIds,
   });
 
   final String name;
   final String price;
   final String description;
+  final List<String> categoryIds;
 
   @override
   Widget build(BuildContext context) {
@@ -45,6 +48,13 @@ class DetailsWidget extends StatelessWidget {
           ),
           PaymentCalculatorWidget(
             price: price,
+          ),
+          const Divider(
+            color: Colors.black54,
+            height: 40,
+          ),
+          SimilarProductsWidget(
+            categoryIds: categoryIds,
           ),
         ],
       ),
