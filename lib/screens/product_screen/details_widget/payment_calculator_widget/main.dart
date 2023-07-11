@@ -32,19 +32,25 @@ class _PaymentCalculatorWidgetState extends State<PaymentCalculatorWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        ProductQuantityPickerWidget(
-          productQuantity: productQuantity,
-          increaseAmountProduct: increaseAmountProduct,
-          decreaseAmountProduct: decreaseAmountProduct,
-        ),
-        const SizedBox(height: 16),
-        PriceOptionsWidget(
-          price: widget.price,
-          productQuantity: productQuantity,
-        ),
-      ],
+    return Padding(
+      padding: const EdgeInsets.symmetric(
+        vertical: 20,
+        horizontal: 12,
+      ),
+      child: Column(
+        children: [
+          ProductQuantityPickerWidget(
+            productQuantity: productQuantity,
+            increaseAmountProduct: increaseAmountProduct,
+            decreaseAmountProduct: decreaseAmountProduct,
+          ),
+          const SizedBox(height: 16),
+          PriceOptionsWidget(
+            price: widget.price,
+            productQuantity: productQuantity,
+          ),
+        ],
+      ),
     );
   }
 }

@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:neumorphic_ui/neumorphic_ui.dart';
 
 class ProductQuantityPickerWidget extends StatefulWidget {
   const ProductQuantityPickerWidget({
@@ -23,8 +23,8 @@ class _ProductQuantityPickerWidgetState
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(
-        horizontal: 12,
-        vertical: 8,
+        horizontal: 16,
+        vertical: 12,
       ),
       decoration: BoxDecoration(
         color: Colors.white,
@@ -32,8 +32,8 @@ class _ProductQuantityPickerWidgetState
         boxShadow: [
           BoxShadow(
             color: Colors.grey.shade400.withOpacity(0.2),
-            spreadRadius: 2,
-            blurRadius: 12,
+            spreadRadius: 12,
+            blurRadius: 16,
           ),
         ],
       ),
@@ -53,10 +53,11 @@ class _ProductQuantityPickerWidgetState
           Row(
             children: [
               ButtonWidget(
+                actionName: "Remover",
                 icon: Icons.remove,
                 function: widget.decreaseAmountProduct,
               ),
-              const SizedBox(width: 10),
+              const SizedBox(width: 8),
               Text(
                 "${widget.productQuantity}",
                 style: const TextStyle(
@@ -64,8 +65,9 @@ class _ProductQuantityPickerWidgetState
                   fontWeight: FontWeight.w500,
                 ),
               ),
-              const SizedBox(width: 10),
+              const SizedBox(width: 8),
               ButtonWidget(
+                actionName: "Adicionar",
                 icon: Icons.add,
                 function: widget.increaseAmountProduct,
               ),
@@ -80,37 +82,36 @@ class _ProductQuantityPickerWidgetState
 class ButtonWidget extends StatelessWidget {
   const ButtonWidget({
     super.key,
+    required this.actionName,
     required this.icon,
     required this.function,
   });
 
+  final String actionName;
   final IconData icon;
   final VoidCallback function;
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () => function(),
-      child: Container(
-        padding: const EdgeInsets.all(3),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          shape: BoxShape.circle,
-          border: Border.all(
-            color: Colors.grey.shade300,
-            width: 0.5,
+    return Tooltip(
+      message: actionName,
+      child: MouseRegion(
+        cursor: SystemMouseCursors.click,
+        child: NeumorphicButton(
+          onPressed: () => function(),
+          padding: const EdgeInsets.all(3),
+          style: NeumorphicStyle(
+            color: Colors.grey.shade50,
+            shape: NeumorphicShape.concave,
+            boxShape: const NeumorphicBoxShape.circle(),
           ),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey.shade400.withOpacity(0.5),
-              spreadRadius: 4,
-              blurRadius: 12,
+          child: NeumorphicIcon(
+            icon,
+            size: 18,
+            style: NeumorphicStyle(
+              color: Colors.grey.shade800,
             ),
-          ],
-        ),
-        child: Icon(
-          icon,
-          size: 18,
+          ),
         ),
       ),
     );

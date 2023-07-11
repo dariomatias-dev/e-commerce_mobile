@@ -27,7 +27,8 @@ class ProductCardWidget extends StatelessWidget {
           horizontal: 10,
         ),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Stack(
               children: [
@@ -66,6 +67,7 @@ class ProductCardWidget extends StatelessWidget {
                   right: 0,
                   bottom: 4,
                   child: InkWell(
+                    onTap: () {},
                     child: Container(
                       padding: const EdgeInsets.all(6),
                       decoration: BoxDecoration(
@@ -89,7 +91,6 @@ class ProductCardWidget extends StatelessWidget {
                         ),
                       ),
                     ),
-                    onTap: () {},
                   ),
                 ),
               ],

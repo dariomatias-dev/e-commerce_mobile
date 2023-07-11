@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:neumorphic_ui/neumorphic_ui.dart';
 
 class HeaderWidget extends StatelessWidget {
   const HeaderWidget({super.key, required this.screenContext});
@@ -22,25 +22,23 @@ class HeaderWidget extends StatelessWidget {
         children: [
           MouseRegion(
             cursor: SystemMouseCursors.click,
-            child: GestureDetector(
-              onTap: () {
-                Navigator.pop(context);
-              },
-              child: Tooltip(
-                message: "Sair",
-                child: Container(
-                  padding: const EdgeInsets.all(7),
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                      width: 0.5,
-                      color: Colors.grey.shade400.withOpacity(0.9),
-                    ),
-                    shape: BoxShape.circle,
-                  ),
-                  child: Icon(
-                    Icons.arrow_back_rounded,
-                    size: 20,
-                    color: Colors.grey.shade600,
+            child: Tooltip(
+              message: "Sair",
+              child: NeumorphicButton(
+                padding: const EdgeInsets.all(5.5),
+                style: NeumorphicStyle(
+                  color: Colors.grey.shade200.withOpacity(0.5),
+                  shape: NeumorphicShape.flat,
+                  boxShape: const NeumorphicBoxShape.circle(),
+                ),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: NeumorphicIcon(
+                  Icons.arrow_back_rounded,
+                  size: 20,
+                  style: const NeumorphicStyle(
+                    color: Colors.white,
                   ),
                 ),
               ),
@@ -73,7 +71,7 @@ class HeaderWidget extends StatelessWidget {
                 ),
               ),
             ),
-          )
+          ),
         ],
       ),
     );

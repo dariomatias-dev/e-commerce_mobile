@@ -33,8 +33,8 @@ class _PriceOptionsWidgetState extends State<PriceOptionsWidget> {
 
     return Container(
       padding: const EdgeInsets.symmetric(
-        horizontal: 12,
-        vertical: 16,
+        horizontal: 16,
+        vertical: 12,
       ),
       decoration: BoxDecoration(
         color: Colors.white,
@@ -42,8 +42,8 @@ class _PriceOptionsWidgetState extends State<PriceOptionsWidget> {
         boxShadow: [
           BoxShadow(
             color: Colors.grey.shade400.withOpacity(0.2),
-            spreadRadius: 2,
-            blurRadius: 12,
+            spreadRadius: 12,
+            blurRadius: 16,
           ),
         ],
       ),

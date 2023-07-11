@@ -21,28 +21,25 @@ class _SimilarProductsWidgetState extends State<SimilarProductsWidget> {
     const String routeName = "products-by-category-ids";
 
     return Container(
-      padding: const EdgeInsets.symmetric(
-        horizontal: 12,
-        vertical: 16,
+      padding: const EdgeInsets.only(
+        top: 16,
       ),
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(10),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.shade400.withOpacity(0.2),
-            spreadRadius: 2,
-            blurRadius: 12,
-          ),
-        ],
       ),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
-            "Produtos similares",
-            style: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.w600,
+          const Padding(
+            padding: EdgeInsets.symmetric(
+              horizontal: 12,
+            ),
+            child: Text(
+              "Produtos similares",
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w700,
+              ),
             ),
           ),
           const SizedBox(height: 4),

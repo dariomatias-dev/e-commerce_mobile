@@ -31,19 +31,8 @@ class _CarouselImagesWidgetState extends State<CarouselImagesWidget> {
       padding: const EdgeInsets.only(
         top: 30,
       ),
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         color: Colors.white,
-        borderRadius: const BorderRadius.vertical(
-          bottom: Radius.circular(40),
-        ),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.shade400.withOpacity(0.35),
-            spreadRadius: 2,
-            blurRadius: 8,
-            offset: const Offset(0, 10),
-          ),
-        ],
       ),
       child: Column(
         children: [

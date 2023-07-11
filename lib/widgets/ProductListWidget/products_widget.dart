@@ -53,8 +53,11 @@ class _ProductsWidgetState extends State<ProductsWidget> {
     final productsCard = widget.productsCard;
 
     return SizedBox(
-      height: 250,
+      height: 254,
       child: ListView.builder(
+        padding: const EdgeInsets.only(
+          bottom: 4,
+        ),
         controller: widget.scrollController,
         scrollDirection: Axis.horizontal,
         itemCount: productsCard.length * 2 + 1,

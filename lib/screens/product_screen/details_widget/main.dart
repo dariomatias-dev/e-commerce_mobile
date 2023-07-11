@@ -20,40 +20,70 @@ class DetailsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
+    return Container(
       padding: const EdgeInsets.symmetric(
-        horizontal: 30,
         vertical: 20,
       ),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: const BorderRadius.vertical(
+          top: Radius.circular(20),
+        ),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.shade400.withOpacity(0.35),
+            spreadRadius: 10,
+            blurRadius: 20,
+            offset: const Offset(10, 0),
+          ),
+        ],
+      ),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            name,
-            style: const TextStyle(
-              color: Colors.black87,
-              fontSize: 18,
-              fontWeight: FontWeight.w700,
+          Padding(
+            padding: const EdgeInsets.only(
+              right: 12,
+              bottom: 16,
+              left: 12,
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  name,
+                  style: const TextStyle(
+                    color: Colors.black87,
+                    fontSize: 18,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+                const SizedBox(height: 12),
+                Text(
+                  description,
+                  textAlign: TextAlign.justify,
+                  style: const TextStyle(
+                    color: Colors.grey,
+                  ),
+                ),
+              ],
             ),
           ),
-          const SizedBox(height: 12),
-          Text(
-            description,
-            textAlign: TextAlign.justify,
-            style: const TextStyle(
-              color: Colors.grey,
+          Container(
+            width: MediaQuery.of(context).size.width,
+            height: 6,
+            decoration: BoxDecoration(
+              color: Colors.grey.shade100,
             ),
-          ),
-          const Divider(
-            color: Colors.black54,
-            height: 40,
           ),
           PaymentCalculatorWidget(
             price: price,
           ),
-          const Divider(
-            color: Colors.black54,
-            height: 40,
+          Container(
+            width: MediaQuery.of(context).size.width,
+            height: 6,
+            decoration: BoxDecoration(
+              color: Colors.grey.shade100,
+            ),
           ),
           SimilarProductsWidget(
             productId: productId,
