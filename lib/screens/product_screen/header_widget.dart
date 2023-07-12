@@ -1,9 +1,11 @@
 import 'package:neumorphic_ui/neumorphic_ui.dart';
 
-class HeaderWidget extends StatelessWidget {
-  const HeaderWidget({super.key, required this.screenContext});
+import 'package:power_tech/providers/product_screen_context_inherited.dart';
 
-  final BuildContext screenContext;
+import 'package:power_tech/utils/show_top_message_bar.dart';
+
+class HeaderWidget extends StatelessWidget {
+  const HeaderWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +56,13 @@ class HeaderWidget extends StatelessWidget {
           MouseRegion(
             cursor: SystemMouseCursors.click,
             child: GestureDetector(
-              onTap: () {},
+              onTap: () {
+                final BuildContext? screenContext =
+                    ProductScreenContextInherited.of(context)?.screenContext;
+                if (screenContext != null) {
+                  showTopMessageBar(context);
+                }
+              },
               child: Container(
                 padding: const EdgeInsets.all(7),
                 decoration: const BoxDecoration(

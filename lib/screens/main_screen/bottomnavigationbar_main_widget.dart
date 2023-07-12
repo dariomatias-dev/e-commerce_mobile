@@ -11,7 +11,8 @@ class BottomNavigationBarMainWidget extends StatefulWidget {
       _BottomNavigationBarMainStateWidget();
 }
 
-class _BottomNavigationBarMainStateWidget extends State<BottomNavigationBarMainWidget> {
+class _BottomNavigationBarMainStateWidget
+    extends State<BottomNavigationBarMainWidget> {
   final List<IconData> _icons = [
     Icons.home,
     Icons.favorite_border,

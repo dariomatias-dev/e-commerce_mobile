@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:power_tech/screens/home_screen/main.dart';
+
+import 'package:power_tech/providers/main_screen_context_inherited.dart';
 
 import 'package:power_tech/screens/main_screen/drawer_widget/main.dart';
 import 'package:power_tech/screens/main_screen/bottomnavigationbar_main_widget.dart';
+import 'package:power_tech/screens/home_screen/main.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -70,9 +72,12 @@ class _MainScreenState extends State<MainScreen> {
         backgroundColor: Colors.black,
       ),
       drawer: const DrawerWidget(),
-      body: IndexedStack(
-        index: _selectedTab,
-        children: _screens,
+      body: MainScreenContextInherited(
+        screenContext: context,
+        child: IndexedStack(
+          index: _selectedTab,
+          children: _screens,
+        ),
       ),
       bottomNavigationBar: BottomNavigationBarMainWidget(
         onTabSelector: onTabSelector,

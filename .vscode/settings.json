@@ -1,5 +1,0 @@
-{
-    "dart.flutterGenerateLocalizationsOnSave": "allIfDirty",
-    "files.autoSave": "afterDelay",
-    "files.autoSaveDelay": 0
-}

@@ -4,7 +4,6 @@ import 'package:power_tech/models/product_card_model.dart';
 
 import 'package:power_tech/widgets/ProductListWidget/product_card_widget.dart';
 
-
 class ProductsWidget extends StatefulWidget {
   const ProductsWidget({
     super.key,
