@@ -4,26 +4,42 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:power_tech/models/product_card_model.dart';
 
 import 'package:power_tech/providers/main_screen_context_inherited.dart';
+import 'package:power_tech/providers/my_app_favorites_inherited.dart';
 import 'package:power_tech/providers/product_screen_context_inherited.dart';
 
 import 'package:power_tech/screens/product_screen/main.dart';
 
 import 'package:power_tech/utils/format_to_real.dart';
-import 'package:power_tech/utils/show_top_message_bar.dart';
+import 'package:power_tech/utils/wishlist_manager/main.dart';
 
 class ProductCardWidget extends StatelessWidget {
   const ProductCardWidget({super.key, required this.productCard});
 
   final ProductCardModel productCard;
 
+  void updateWishlist(
+    BuildContext screenContext,
+    String productId,
+    List<String> favorites,
+  ) {
+    final WishlistManager wishlistManager = WishlistManager(
+      screenContext: screenContext,
+      productId: productId,
+      favorites: favorites,
+    );
+    wishlistManager.update();
+  }
+
   @override
   Widget build(BuildContext context) {
+    final BuildContext screenContext =
+        MainScreenContextInherited.of(context)?.screenContext ??
+            ProductScreenContextInherited.of(context)!.screenContext;
+    final List<String> favorites =
+        MyAppFavoritesInherited.of(context)!.favorites;
+
     final double price = double.parse(productCard.price);
     final String formattedPrice = formatToReal(price);
-
-    final BuildContext? screenContext =
-        MainScreenContextInherited.of(context)?.screenContext ??
-            ProductScreenContextInherited.of(context)?.screenContext;
 
     return Card(
       elevation: 5,
@@ -77,11 +93,11 @@ class ProductCardWidget extends StatelessWidget {
                   right: 0,
                   bottom: 4,
                   child: InkWell(
-                    onTap: () {
-                      if (screenContext != null) {
-                        showTopMessageBar(screenContext);
-                      }
-                    },
+                    onTap: () => updateWishlist(
+                      screenContext,
+                      productCard.id,
+                      favorites,
+                    ),
                     child: Container(
                       padding: const EdgeInsets.all(6),
                       decoration: BoxDecoration(

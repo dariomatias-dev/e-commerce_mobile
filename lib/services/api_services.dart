@@ -1,5 +1,6 @@
 import "package:flutter_dotenv/flutter_dotenv.dart";
 import "package:http/http.dart" as http;
+import "dart:convert";
 
 class APIServices {
   Future<String> fetchData(String path) async {
@@ -17,12 +18,16 @@ class APIServices {
 
   Future<void> createData(String path, Map<String, dynamic> body) async {
     String url = "${dotenv.env["API_URL"]}/$path";
+
     final response = await http.post(
       Uri.parse(url),
-      body: body,
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: jsonEncode(body),
     );
 
-    await handleResponseError(
+    handleResponseError(
       response,
       "Failed create data, Status code ${response.statusCode}",
     );
@@ -35,7 +40,7 @@ class APIServices {
       body: body,
     );
 
-    await handleResponseError(
+    handleResponseError(
       response,
       "Failed update data, Status code ${response.statusCode}",
     );
@@ -45,16 +50,16 @@ class APIServices {
     String url = "${dotenv.env["API_URL"]}/$path";
     final response = await http.delete(Uri.parse(url));
 
-    await handleResponseError(
+    handleResponseError(
       response,
       "Failed delete data, Status code ${response.statusCode}",
     );
   }
 
-  Future<void> handleResponseError(
+  void handleResponseError(
     http.Response response,
     String errorMessage,
-  ) async {
+  ) {
     if (response.statusCode == 200) {
       throw Exception(errorMessage);
     }
