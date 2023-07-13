@@ -44,10 +44,15 @@ class _MyAppState extends State<MyApp> {
     }
   }
 
+  void updateFavorites(List<String> newFavorites) {
+    favorites = newFavorites;
+  }
+
   @override
   Widget build(BuildContext context) {
     return MyAppFavoritesInherited(
       favorites: favorites ?? [],
+      updateFavorites: updateFavorites,
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: "Power Tech App",

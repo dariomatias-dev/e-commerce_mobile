@@ -20,12 +20,12 @@ class ProductCardWidget extends StatelessWidget {
   void updateWishlist(
     BuildContext screenContext,
     String productId,
-    List<String> favorites,
+    MyAppFavoritesInherited myAppFavoritesInherited,
   ) {
     final WishlistManager wishlistManager = WishlistManager(
       screenContext: screenContext,
       productId: productId,
-      favorites: favorites,
+      myAppFavoritesInherited: myAppFavoritesInherited,
     );
     wishlistManager.update();
   }
@@ -35,8 +35,8 @@ class ProductCardWidget extends StatelessWidget {
     final BuildContext screenContext =
         MainScreenContextInherited.of(context)?.screenContext ??
             ProductScreenContextInherited.of(context)!.screenContext;
-    final List<String> favorites =
-        MyAppFavoritesInherited.of(context)!.favorites;
+    final MyAppFavoritesInherited myAppFavoritesInherited =
+        MyAppFavoritesInherited.of(context)!;
 
     final double price = double.parse(productCard.price);
     final String formattedPrice = formatToReal(price);
@@ -96,7 +96,7 @@ class ProductCardWidget extends StatelessWidget {
                     onTap: () => updateWishlist(
                       screenContext,
                       productCard.id,
-                      favorites,
+                      myAppFavoritesInherited,
                     ),
                     child: Container(
                       padding: const EdgeInsets.all(6),

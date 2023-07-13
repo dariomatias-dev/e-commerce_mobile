@@ -66,7 +66,9 @@ class _ProductScreenState extends State<ProductScreen> {
               child: SingleChildScrollView(
                 child: Column(
                   children: [
-                    const HeaderWidget(),
+                    HeaderWidget(
+                      productId: value.id,
+                    ),
                     CarouselImagesWidget(
                       imageUrlIds: value.imageUrlIds,
                     ),

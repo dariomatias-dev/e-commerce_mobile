@@ -29,7 +29,7 @@ class APIServices {
 
     handleResponseError(
       response,
-      "Failed create data, Status code ${response.statusCode}",
+      "Failed create data. Status code ${response.statusCode}",
     );
   }
 
@@ -42,7 +42,7 @@ class APIServices {
 
     handleResponseError(
       response,
-      "Failed update data, Status code ${response.statusCode}",
+      "Failed update data. Status code ${response.statusCode}",
     );
   }
 
@@ -52,7 +52,7 @@ class APIServices {
 
     handleResponseError(
       response,
-      "Failed delete data, Status code ${response.statusCode}",
+      "Failed delete data. Status code ${response.statusCode}",
     );
   }
 
@@ -60,7 +60,7 @@ class APIServices {
     http.Response response,
     String errorMessage,
   ) {
-    if (response.statusCode == 200) {
+    if (response.statusCode != 200) {
       throw Exception(errorMessage);
     }
   }

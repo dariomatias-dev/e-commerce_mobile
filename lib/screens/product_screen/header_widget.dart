@@ -1,14 +1,33 @@
 import 'package:neumorphic_ui/neumorphic_ui.dart';
+import 'package:power_tech/providers/my_app_favorites_inherited.dart';
 
 import 'package:power_tech/providers/product_screen_context_inherited.dart';
 
-import 'package:power_tech/utils/show_top_message_bar.dart';
+import 'package:power_tech/utils/wishlist_manager/main.dart';
 
 class HeaderWidget extends StatelessWidget {
-  const HeaderWidget({super.key});
+  const HeaderWidget({super.key, required this.productId});
+
+  final String productId;
+
+  void updateWishlist(
+    BuildContext screenContext,
+    String productId,
+    MyAppFavoritesInherited myAppFavoritesInherited,
+  ) {
+    final WishlistManager wishlistManager = WishlistManager(
+      screenContext: screenContext,
+      productId: productId,
+      myAppFavoritesInherited: myAppFavoritesInherited,
+    );
+    wishlistManager.update();
+  }
 
   @override
   Widget build(BuildContext context) {
+    final MyAppFavoritesInherited myAppFavoritesInherited =
+        MyAppFavoritesInherited.of(context)!;
+
     return Container(
       padding: const EdgeInsets.only(
         top: 16,
@@ -56,13 +75,11 @@ class HeaderWidget extends StatelessWidget {
           MouseRegion(
             cursor: SystemMouseCursors.click,
             child: GestureDetector(
-              onTap: () {
-                final BuildContext? screenContext =
-                    ProductScreenContextInherited.of(context)?.screenContext;
-                if (screenContext != null) {
-                  showTopMessageBar(context);
-                }
-              },
+              onTap: () => updateWishlist(
+                ProductScreenContextInherited.of(context)!.screenContext,
+                productId,
+                myAppFavoritesInherited,
+              ),
               child: Container(
                 padding: const EdgeInsets.all(7),
                 decoration: const BoxDecoration(
