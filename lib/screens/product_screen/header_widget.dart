@@ -1,6 +1,6 @@
 import 'package:neumorphic_ui/neumorphic_ui.dart';
-import 'package:power_tech/providers/my_app_favorites_inherited.dart';
 
+import 'package:power_tech/providers/my_app_favorites_inherited.dart';
 import 'package:power_tech/providers/product_screen_context_inherited.dart';
 
 import 'package:power_tech/utils/wishlist_manager/main.dart';

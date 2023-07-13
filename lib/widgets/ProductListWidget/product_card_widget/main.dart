@@ -3,41 +3,19 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 import 'package:power_tech/models/product_card_model.dart';
 
-import 'package:power_tech/providers/main_screen_context_inherited.dart';
-import 'package:power_tech/providers/my_app_favorites_inherited.dart';
-import 'package:power_tech/providers/product_screen_context_inherited.dart';
-
 import 'package:power_tech/screens/product_screen/main.dart';
 
+import 'package:power_tech/widgets/ProductListWidget/product_card_widget/wishlist_button_widget.dart';
+
 import 'package:power_tech/utils/format_to_real.dart';
-import 'package:power_tech/utils/wishlist_manager/main.dart';
 
 class ProductCardWidget extends StatelessWidget {
   const ProductCardWidget({super.key, required this.productCard});
 
   final ProductCardModel productCard;
 
-  void updateWishlist(
-    BuildContext screenContext,
-    String productId,
-    MyAppFavoritesInherited myAppFavoritesInherited,
-  ) {
-    final WishlistManager wishlistManager = WishlistManager(
-      screenContext: screenContext,
-      productId: productId,
-      myAppFavoritesInherited: myAppFavoritesInherited,
-    );
-    wishlistManager.update();
-  }
-
   @override
   Widget build(BuildContext context) {
-    final BuildContext screenContext =
-        MainScreenContextInherited.of(context)?.screenContext ??
-            ProductScreenContextInherited.of(context)!.screenContext;
-    final MyAppFavoritesInherited myAppFavoritesInherited =
-        MyAppFavoritesInherited.of(context)!;
-
     final double price = double.parse(productCard.price);
     final String formattedPrice = formatToReal(price);
 
@@ -89,39 +67,8 @@ class ProductCardWidget extends StatelessWidget {
                     ),
                   ),
                 ),
-                Positioned(
-                  right: 0,
-                  bottom: 4,
-                  child: InkWell(
-                    onTap: () => updateWishlist(
-                      screenContext,
-                      productCard.id,
-                      myAppFavoritesInherited,
-                    ),
-                    child: Container(
-                      padding: const EdgeInsets.all(6),
-                      decoration: BoxDecoration(
-                        color: Colors.black,
-                        shape: BoxShape.circle,
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey.withOpacity(0.5),
-                            spreadRadius: 2,
-                            blurRadius: 4,
-                            offset: const Offset(0, 3),
-                          ),
-                        ],
-                      ),
-                      child: const Tooltip(
-                        message: "Favorito",
-                        child: Icon(
-                          Icons.favorite_outline,
-                          color: Colors.white54,
-                          size: 20,
-                        ),
-                      ),
-                    ),
-                  ),
+                WishlistButtonWidget(
+                  productId: productCard.id,
                 ),
               ],
             ),

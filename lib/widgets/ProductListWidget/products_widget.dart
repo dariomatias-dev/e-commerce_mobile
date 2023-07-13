@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:power_tech/models/product_card_model.dart';
 
-import 'package:power_tech/widgets/ProductListWidget/product_card_widget.dart';
+import 'package:power_tech/widgets/ProductListWidget/product_card_widget/main.dart';
 
 class ProductsWidget extends StatefulWidget {
   const ProductsWidget({

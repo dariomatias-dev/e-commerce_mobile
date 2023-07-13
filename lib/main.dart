@@ -1,11 +1,12 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:power_tech/providers/my_app_favorites_inherited.dart';
 import 'dart:developer' as developer;
+import 'dart:convert';
+
+import 'package:power_tech/providers/my_app_favorites_inherited.dart';
 
 import 'package:power_tech/screens/main_screen/main.dart';
+
 import 'package:power_tech/services/api_services.dart';
 
 void main() async {

@@ -24,7 +24,7 @@ class ProductScreen extends StatefulWidget {
 
 class _ProductScreenState extends State<ProductScreen> {
   final APIServices apiServices = APIServices();
-  late final ValueNotifier<ProductModel?> product =
+  final ValueNotifier<ProductModel?> product =
       ValueNotifier<ProductModel?>(null);
 
   @override
@@ -59,6 +59,8 @@ class _ProductScreenState extends State<ProductScreen> {
               return const CircularProgressIndicator();
             }
 
+            final String id = value.id;
+
             return ScrollConfiguration(
               behavior: ScrollConfiguration.of(context).copyWith(
                 scrollbars: false,
@@ -67,13 +69,13 @@ class _ProductScreenState extends State<ProductScreen> {
                 child: Column(
                   children: [
                     HeaderWidget(
-                      productId: value.id,
+                      productId: id,
                     ),
                     CarouselImagesWidget(
                       imageUrlIds: value.imageUrlIds,
                     ),
                     DetailsWidget(
-                      productId: value.id,
+                      productId: id,
                       name: value.name,
                       price: value.price,
                       description: value.description,
