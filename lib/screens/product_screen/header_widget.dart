@@ -1,32 +1,31 @@
 import 'package:neumorphic_ui/neumorphic_ui.dart';
 
-import 'package:power_tech/providers/my_app_favorites_inherited.dart';
 import 'package:power_tech/providers/product_screen_context_inherited.dart';
 
-import 'package:power_tech/utils/wishlist_manager/main.dart';
+import 'package:power_tech/managers/user_preferences_manager.dart';
 
 class HeaderWidget extends StatelessWidget {
   const HeaderWidget({super.key, required this.productId});
 
   final String productId;
 
-  void updateWishlist(
-    BuildContext screenContext,
+  void updateUserPreferences(
     String productId,
-    MyAppFavoritesInherited myAppFavoritesInherited,
+    BuildContext context,
+    BuildContext screenContext,
   ) {
-    final WishlistManager wishlistManager = WishlistManager(
-      screenContext: screenContext,
+    final UserPreferencesManager userPreferencesManager = UserPreferencesManager(
+      listType: "wishlist",
       productId: productId,
-      myAppFavoritesInherited: myAppFavoritesInherited,
+      screenContext: screenContext,
+      context: context,
     );
-    wishlistManager.update();
+    userPreferencesManager.update();
   }
 
   @override
   Widget build(BuildContext context) {
-    final MyAppFavoritesInherited myAppFavoritesInherited =
-        MyAppFavoritesInherited.of(context)!;
+    final BuildContext screenContext = ProductScreenContextInherited.of(context)!.screenContext;
 
     return Container(
       padding: const EdgeInsets.only(
@@ -75,10 +74,10 @@ class HeaderWidget extends StatelessWidget {
           MouseRegion(
             cursor: SystemMouseCursors.click,
             child: GestureDetector(
-              onTap: () => updateWishlist(
-                ProductScreenContextInherited.of(context)!.screenContext,
+              onTap: () => updateUserPreferences(
                 productId,
-                myAppFavoritesInherited,
+                context,
+                screenContext,
               ),
               child: Container(
                 padding: const EdgeInsets.all(7),

@@ -9,7 +9,7 @@ import 'package:power_tech/providers/product_screen_context_inherited.dart';
 import 'package:power_tech/screens/product_screen/header_widget.dart';
 import 'package:power_tech/screens/product_screen/carousel_images_widget.dart';
 import 'package:power_tech/screens/product_screen/details_widget/main.dart';
-import 'package:power_tech/screens/product_screen/bottomnavigationbar_product_widget.dart';
+import 'package:power_tech/screens/product_screen/bottomnavigationbar_product_widget/main.dart';
 
 import 'package:power_tech/services/api_services.dart';
 
@@ -49,19 +49,23 @@ class _ProductScreenState extends State<ProductScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: ProductScreenContextInherited(
-        screenContext: context,
-        child: ValueListenableBuilder(
-          valueListenable: product,
-          builder: (context, value, child) {
-            if (value == null) {
-              return const CircularProgressIndicator();
-            }
+    return ValueListenableBuilder(
+      valueListenable: product,
+      builder: (context, value, child) {
+        if (value == null) {
+          return const Scaffold(
+            body: Center(
+              child: CircularProgressIndicator(),
+            ),
+          );
+        }
 
-            final String id = value.id;
+        final String id = value.id;
 
-            return ScrollConfiguration(
+        return ProductScreenContextInherited(
+          screenContext: context,
+          child: Scaffold(
+            body: ScrollConfiguration(
               behavior: ScrollConfiguration.of(context).copyWith(
                 scrollbars: false,
               ),
@@ -84,11 +88,13 @@ class _ProductScreenState extends State<ProductScreen> {
                   ],
                 ),
               ),
-            );
-          },
-        ),
-      ),
-      bottomNavigationBar: const BottomNavigationBarProductWidget(),
+            ),
+            bottomNavigationBar: BottomNavigationBarProductWidget(
+              productId: id,
+            ),
+          ),
+        );
+      },
     );
   }
 }

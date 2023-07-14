@@ -3,7 +3,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'dart:developer' as developer;
 import 'dart:convert';
 
-import 'package:power_tech/providers/my_app_favorites_inherited.dart';
+import 'package:power_tech/providers/user_preferences_inherited.dart';
 
 import 'package:power_tech/screens/main_screen/main.dart';
 
@@ -24,19 +24,26 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   final APIServices apiServices = APIServices();
-  List<String>? favorites;
+  List<String>? favoriteProducts;
+  List<String>? cartProducts;
 
   @override
   void initState() {
     super.initState();
-    fetchData();
+    fetchFavoriteProducts();
+    fetchCartProducts();
   }
 
-  Future<void> fetchData() async {
+  Future<void> fetchFavoriteProducts() async {
     try {
-      var response = await apiServices
-          .fetchData("favorites/f681f544-20ec-11ee-be56-0242ac120002");
-      favorites = (jsonDecode(response) as List<dynamic>).cast<String>();
+      var response = await apiServices.fetchData(
+        "wishlist/f681f544-20ec-11ee-be56-0242ac120002",
+      );
+
+      if (jsonDecode(response) != null) {
+        favoriteProducts =
+            (jsonDecode(response) as List<dynamic>).cast<String>();
+      }
     } catch (err) {
       developer.log(
         "An excess occurred: $err",
@@ -45,15 +52,38 @@ class _MyAppState extends State<MyApp> {
     }
   }
 
-  void updateFavorites(List<String> newFavorites) {
-    favorites = newFavorites;
+  Future<void> fetchCartProducts() async {
+    try {
+      var response = await apiServices.fetchData(
+        "cart/f681f544-20ec-11ee-be56-0242ac120002",
+      );
+
+      if (jsonDecode(response) != null) {
+        cartProducts = (jsonDecode(response) as List<dynamic>).cast<String>();
+      }
+    } catch (err) {
+      developer.log(
+        "An excess occurred: $err",
+        error: err,
+      );
+    }
+  }
+
+  void updateFavoriteProducts(List<String> newFavoriteProducts) {
+    favoriteProducts = newFavoriteProducts;
+  }
+
+  void updateCartProducts(List<String> newCartProducts) {
+    cartProducts = newCartProducts;
   }
 
   @override
   Widget build(BuildContext context) {
-    return MyAppFavoritesInherited(
-      favorites: favorites ?? [],
-      updateFavorites: updateFavorites,
+    return UserPreferencesInherited(
+      favoriteProducts: favoriteProducts ?? [],
+      updateFavoriteProducts: updateFavoriteProducts,
+      cartProducts: cartProducts ?? [],
+      updateCartProducts: updateCartProducts,
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: "Power Tech App",

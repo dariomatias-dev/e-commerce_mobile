@@ -14,10 +14,10 @@ Map<String, dynamic> messages = {
   },
 };
 
-void showTopMessageBar(BuildContext context, String type, String action) {
+void showTopMessageBar(BuildContext context, String listType, String actionType) {
   CherryToast.success(
     title: Text(
-      messages[type][action],
+      messages[listType][actionType],
       style: const TextStyle(
         fontSize: 15,
         fontWeight: FontWeight.w500,

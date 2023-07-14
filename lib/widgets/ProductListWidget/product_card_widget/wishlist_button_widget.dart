@@ -1,27 +1,27 @@
 import 'package:flutter/material.dart';
 
 import 'package:power_tech/providers/main_screen_context_inherited.dart';
-import 'package:power_tech/providers/my_app_favorites_inherited.dart';
 import 'package:power_tech/providers/product_screen_context_inherited.dart';
 
-import 'package:power_tech/utils/wishlist_manager/main.dart';
+import 'package:power_tech/managers/user_preferences_manager.dart';
 
 class WishlistButtonWidget extends StatelessWidget {
   const WishlistButtonWidget({super.key, required this.productId});
 
   final String productId;
 
-  void updateWishlist(
-    BuildContext screenContext,
+  void updateUserPreferences(
     String productId,
-    MyAppFavoritesInherited myAppFavoritesInherited,
+    BuildContext context,
+    BuildContext screenContext,
   ) {
-    final WishlistManager wishlistManager = WishlistManager(
-      screenContext: screenContext,
+    final UserPreferencesManager userPreferencesManager = UserPreferencesManager(
+      listType: "wishlist",
       productId: productId,
-      myAppFavoritesInherited: myAppFavoritesInherited,
+      screenContext: screenContext,
+      context: context,
     );
-    wishlistManager.update();
+    userPreferencesManager.update();
   }
 
   @override
@@ -29,17 +29,15 @@ class WishlistButtonWidget extends StatelessWidget {
     final BuildContext screenContext =
         MainScreenContextInherited.of(context)?.screenContext ??
             ProductScreenContextInherited.of(context)!.screenContext;
-    final MyAppFavoritesInherited myAppFavoritesInherited =
-        MyAppFavoritesInherited.of(context)!;
 
     return Positioned(
       right: 0,
       bottom: 4,
       child: InkWell(
-        onTap: () => updateWishlist(
-          screenContext,
+        onTap: () => updateUserPreferences(
           productId,
-          myAppFavoritesInherited,
+          context,
+          screenContext,
         ),
         child: Container(
           padding: const EdgeInsets.all(6),

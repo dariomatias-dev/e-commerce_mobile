@@ -1,7 +1,14 @@
 import 'package:flutter/material.dart';
 
+import 'package:power_tech/screens/product_screen/bottomnavigationbar_product_widget/cart_button_widget.dart';
+
 class BottomNavigationBarProductWidget extends StatelessWidget {
-  const BottomNavigationBarProductWidget({super.key});
+  const BottomNavigationBarProductWidget({
+    super.key,
+    required this.productId,
+  });
+
+  final String productId;
 
   @override
   Widget build(BuildContext context) {
@@ -9,23 +16,8 @@ class BottomNavigationBarProductWidget extends StatelessWidget {
       margin: const EdgeInsets.fromLTRB(30, 0, 30, 24),
       child: Row(
         children: [
-          MouseRegion(
-            cursor: SystemMouseCursors.click,
-            child: GestureDetector(
-              onTap: () {},
-              child: Tooltip(
-                message: "Carrinho",
-                child: Container(
-                  width: 50,
-                  height: 50,
-                  decoration: BoxDecoration(
-                    border: Border.all(),
-                    shape: BoxShape.circle,
-                  ),
-                  child: const Icon(Icons.shopping_cart),
-                ),
-              ),
-            ),
+          CartButtonWidget(
+            productId: productId,
           ),
           const SizedBox(width: 10),
           Expanded(
