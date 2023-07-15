@@ -22,6 +22,9 @@ class _SectionProductsState extends State<SectionProducts> {
           margin: const EdgeInsets.symmetric(
             horizontal: 10,
           ),
+          decoration: const BoxDecoration(
+            color: Colors.white,
+          ),
           child: const Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [

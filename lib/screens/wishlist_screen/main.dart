@@ -26,7 +26,14 @@ class _WishlistScreenState extends State<WishlistScreen> {
   Future<void> fetchData(int skip) async {
     final List<String>? productIds =
         UserPreferencesInherited.of(context)?.wishlistProductIds;
-    if (productIds == null || productIds.isEmpty) {
+    if (productIds == null) {
+      return;
+    } else if (productIds.isEmpty) {
+      productsCardNavigation.value = ProductsCardNavigationModel(
+        skip: 0,
+        take: 0,
+        productsCard: [],
+      );
       return;
     }
 
@@ -70,29 +77,61 @@ class _WishlistScreenState extends State<WishlistScreen> {
       builder: (context, value, child) {
         if (value == null) {
           return const CircularProgressIndicator();
+        } else if (value.productsCard.isEmpty) {
+          return const Center(
+            child: Text(
+              "Lista de desejos vazia.",
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          );
         }
 
-        return SingleChildScrollView(
-          child: Align(
-            alignment: Alignment.center,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(
-                vertical: 16,
-                horizontal: 10,
+        return Scaffold(
+          appBar: AppBar(
+            elevation: 0,
+            title: const Text(
+              "Lista de desejos",
+              style: TextStyle(
+                color: Colors.black,
               ),
-              child: LayoutBuilder(
-                builder: (context, constraints) {
-                  return Wrap(
-                    spacing: 10,
-                    runSpacing: 10,
-                    alignment: WrapAlignment.spaceBetween,
-                    children: List.generate(value.productsCard.length, (index) {
-                      return ProductCardWidget(
-                        productCard: value.productsCard[index],
-                      );
-                    }),
-                  );
-                },
+            ),
+            backgroundColor: Colors.white,
+            actions: const [
+              Icon(
+                Icons.search,
+                color: Colors.black,
+              ),
+              SizedBox(width: 6),
+            ],
+          ),
+          body: SingleChildScrollView(
+            child: Align(
+              alignment: Alignment.center,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                  vertical: 16,
+                  horizontal: 10,
+                ),
+                child: LayoutBuilder(
+                  builder: (context, constraints) {
+                    return Wrap(
+                      spacing: 10,
+                      runSpacing: 10,
+                      alignment: WrapAlignment.spaceBetween,
+                      children: List.generate(
+                        value.productsCard.length,
+                        (index) {
+                          return ProductCardWidget(
+                            productCard: value.productsCard[index],
+                          );
+                        },
+                      ),
+                    );
+                  },
+                ),
               ),
             ),
           ),

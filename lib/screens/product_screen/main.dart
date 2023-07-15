@@ -8,7 +8,7 @@ import 'package:power_tech/providers/product_screen_context_inherited.dart';
 
 import 'package:power_tech/screens/product_screen/header_widget.dart';
 import 'package:power_tech/screens/product_screen/carousel_images_widget.dart';
-import 'package:power_tech/screens/product_screen/details_widget/main.dart';
+import 'package:power_tech/screens/product_screen/infos_widget/main.dart';
 import 'package:power_tech/screens/product_screen/bottomnavigationbar_product_widget/main.dart';
 
 import 'package:power_tech/services/api_services.dart';
@@ -78,7 +78,7 @@ class _ProductScreenState extends State<ProductScreen> {
                     CarouselImagesWidget(
                       imageUrlIds: value.imageUrlIds,
                     ),
-                    DetailsWidget(
+                    InfosWidget(
                       productId: id,
                       name: value.name,
                       price: value.price,

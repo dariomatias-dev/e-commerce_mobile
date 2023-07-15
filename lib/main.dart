@@ -92,7 +92,7 @@ class _MyAppState extends State<MyApp> {
         debugShowCheckedModeBanner: false,
         title: "Power Tech App",
         theme: ThemeData(
-          canvasColor: const Color.fromARGB(255, 250, 250, 250),
+          canvasColor: Colors.white,
         ),
         initialRoute: "/",
         routes: {
