@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'package:cherry_toast/cherry_toast.dart';
 import 'package:cherry_toast/resources/arrays.dart';
 
@@ -14,7 +13,8 @@ Map<String, dynamic> messages = {
   },
 };
 
-void showTopMessageBar(BuildContext context, String listType, String actionType) {
+void showTopMessageBar(
+    BuildContext context, String listType, String actionType) {
   CherryToast.success(
     title: Text(
       messages[listType][actionType],
@@ -25,6 +25,8 @@ void showTopMessageBar(BuildContext context, String listType, String actionType)
     ),
     animationType: AnimationType.fromTop,
     displayCloseButton: false,
-    toastDuration: const Duration(milliseconds: 2000),
+    toastDuration: const Duration(
+      milliseconds: 2000,
+    ),
   ).show(context);
 }

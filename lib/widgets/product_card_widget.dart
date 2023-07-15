@@ -5,12 +5,15 @@ import 'package:power_tech/models/product_card_model.dart';
 
 import 'package:power_tech/screens/product_screen/main.dart';
 
-import 'package:power_tech/widgets/product_card_widget/wishlist_button_widget.dart';
+import 'package:power_tech/widgets/wishlist_button_widget.dart';
 
 import 'package:power_tech/utils/format_to_real.dart';
 
 class ProductCardWidget extends StatelessWidget {
-  const ProductCardWidget({super.key, required this.productCard});
+  const ProductCardWidget({
+    super.key,
+    required this.productCard,
+  });
 
   final ProductCardModel productCard;
 
@@ -68,8 +71,12 @@ class ProductCardWidget extends StatelessWidget {
                     ),
                   ),
                 ),
-                WishlistButtonWidget(
-                  productId: productCard.id,
+                Positioned(
+                  right: 0,
+                  bottom: 4,
+                  child: WishlistButtonWidget(
+                    productId: productCard.id,
+                  ),
                 ),
               ],
             ),

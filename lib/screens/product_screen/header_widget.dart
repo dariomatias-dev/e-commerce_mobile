@@ -1,11 +1,14 @@
 import 'package:neumorphic_ui/neumorphic_ui.dart';
 
-import 'package:power_tech/providers/product_screen_context_inherited.dart';
-
 import 'package:power_tech/managers/user_preferences_manager.dart';
 
+import 'package:power_tech/widgets/wishlist_button_widget.dart';
+
 class HeaderWidget extends StatelessWidget {
-  const HeaderWidget({super.key, required this.productId});
+  const HeaderWidget({
+    super.key,
+    required this.productId,
+  });
 
   final String productId;
 
@@ -14,7 +17,8 @@ class HeaderWidget extends StatelessWidget {
     BuildContext context,
     BuildContext screenContext,
   ) {
-    final UserPreferencesManager userPreferencesManager = UserPreferencesManager(
+    final UserPreferencesManager userPreferencesManager =
+        UserPreferencesManager(
       listType: "wishlist",
       productId: productId,
       screenContext: screenContext,
@@ -25,8 +29,6 @@ class HeaderWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final BuildContext screenContext = ProductScreenContextInherited.of(context)!.screenContext;
-
     return Container(
       padding: const EdgeInsets.only(
         top: 16,
@@ -71,30 +73,8 @@ class HeaderWidget extends StatelessWidget {
               fontWeight: FontWeight.w500,
             ),
           ),
-          MouseRegion(
-            cursor: SystemMouseCursors.click,
-            child: GestureDetector(
-              onTap: () => updateUserPreferences(
-                productId,
-                context,
-                screenContext,
-              ),
-              child: Container(
-                padding: const EdgeInsets.all(7),
-                decoration: const BoxDecoration(
-                  color: Colors.black,
-                  shape: BoxShape.circle,
-                ),
-                child: const Tooltip(
-                  message: "Favorito",
-                  child: Icon(
-                    Icons.favorite_border,
-                    color: Colors.white54,
-                    size: 18,
-                  ),
-                ),
-              ),
-            ),
+          WishlistButtonWidget(
+            productId: productId,
           ),
         ],
       ),

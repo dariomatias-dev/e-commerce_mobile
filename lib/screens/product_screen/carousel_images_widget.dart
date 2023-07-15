@@ -4,7 +4,10 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 
 class CarouselImagesWidget extends StatefulWidget {
-  const CarouselImagesWidget({super.key, required this.imageUrlIds});
+  const CarouselImagesWidget({
+    super.key,
+    required this.imageUrlIds,
+  });
 
   final List<String> imageUrlIds;
 

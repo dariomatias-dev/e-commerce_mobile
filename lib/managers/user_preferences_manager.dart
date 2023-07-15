@@ -1,8 +1,10 @@
 import "package:flutter/material.dart";
-import 'package:power_tech/providers/user_preferences_inherited.dart';
 import "dart:developer" as developer;
 
+import 'package:power_tech/providers/user_preferences_inherited.dart';
+
 import "package:power_tech/services/api_services.dart";
+
 import 'package:power_tech/utils/show_top_message_bar.dart';
 
 class UserPreferencesManager {

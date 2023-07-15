@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
 class BottomNavigationBarMainWidget extends StatefulWidget {
-  const BottomNavigationBarMainWidget({super.key, required this.onTabSelector});
+  const BottomNavigationBarMainWidget({
+    super.key,
+    required this.onTabSelector,
+  });
 
   final Function(int) onTabSelector;
 

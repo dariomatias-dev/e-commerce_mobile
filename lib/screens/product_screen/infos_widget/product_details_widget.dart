@@ -54,12 +54,15 @@ class _ProductDetailsWidgetState extends State<ProductDetailsWidget> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
-                    widget.name,
-                    style: const TextStyle(
-                      color: Colors.black87,
-                      fontSize: 18,
-                      fontWeight: FontWeight.w700,
+                  Flexible(
+                    child: Text(
+                      widget.name,
+                      softWrap: true,
+                      style: const TextStyle(
+                        color: Colors.black87,
+                        fontSize: 18,
+                        fontWeight: FontWeight.w700,
+                      ),
                     ),
                   ),
                   ProductQuantityPickerWidget(

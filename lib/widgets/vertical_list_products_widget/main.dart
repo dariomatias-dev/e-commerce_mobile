@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'dart:convert';
 import "dart:developer" as developer;
 
-import 'package:power_tech/services/api_services.dart';
-
 import 'package:power_tech/models/products_card_navigation_model.dart';
 import 'package:power_tech/models/product_card_model.dart';
+
+import 'package:power_tech/services/api_services.dart';
 
 import 'package:power_tech/widgets/vertical_list_products_widget/products_widget.dart';
 
@@ -22,10 +22,12 @@ class VerticalListProductsWidget extends StatefulWidget {
   final String? categoryIds;
 
   @override
-  State<VerticalListProductsWidget> createState() => _VerticalListProductsWidgetState();
+  State<VerticalListProductsWidget> createState() =>
+      _VerticalListProductsWidgetState();
 }
 
-class _VerticalListProductsWidgetState extends State<VerticalListProductsWidget> {
+class _VerticalListProductsWidgetState
+    extends State<VerticalListProductsWidget> {
   final APIServices apiServices = APIServices();
   final ValueNotifier<ProductsCardNavigationModel?> productsCardNavigation =
       ValueNotifier<ProductsCardNavigationModel?>(null);
@@ -114,7 +116,7 @@ class _VerticalListProductsWidgetState extends State<VerticalListProductsWidget>
           return const CircularProgressIndicator();
         }
 
-        return ProductsWidget(
+        return VerticalProductListWidget(
           productsCard: value.productsCard,
           scrollController: scrollController,
           fetchData: loadMoreProducts,

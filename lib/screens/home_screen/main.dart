@@ -43,7 +43,7 @@ class _HomeScreenState extends State<HomeScreen> {
         actions: [
           Icon(
             Icons.notifications_none_sharp,
-              color: Colors.grey.shade800,
+            color: Colors.grey.shade800,
           ),
           const SizedBox(width: 6),
         ],

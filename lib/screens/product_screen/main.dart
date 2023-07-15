@@ -14,7 +14,10 @@ import 'package:power_tech/screens/product_screen/bottomnavigationbar_product_wi
 import 'package:power_tech/services/api_services.dart';
 
 class ProductScreen extends StatefulWidget {
-  const ProductScreen({super.key, required this.productId});
+  const ProductScreen({
+    super.key,
+    required this.productId,
+  });
 
   final String productId;
 

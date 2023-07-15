@@ -4,9 +4,10 @@ import 'dart:convert';
 
 import 'package:power_tech/models/product_card_model.dart';
 import 'package:power_tech/models/products_card_navigation_model.dart';
+
 import 'package:power_tech/providers/user_preferences_inherited.dart';
 
-import 'package:power_tech/widgets/product_card_widget/main.dart';
+import 'package:power_tech/widgets/product_card_widget.dart';
 
 import 'package:power_tech/services/api_services.dart';
 

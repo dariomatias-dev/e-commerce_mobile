@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:power_tech/managers/user_preferences_manager.dart';
+
 import 'package:power_tech/providers/product_screen_context_inherited.dart';
 
 class CartButtonWidget extends StatelessWidget {
@@ -28,7 +29,8 @@ class CartButtonWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final BuildContext screenContext = ProductScreenContextInherited.of(context)!.screenContext;
+    final BuildContext screenContext =
+        ProductScreenContextInherited.of(context)!.screenContext;
 
     return InkWell(
       onTap: () => updateUserPreferences(

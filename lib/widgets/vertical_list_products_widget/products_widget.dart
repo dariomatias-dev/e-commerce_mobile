@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 
 import 'package:power_tech/models/product_card_model.dart';
 
-import 'package:power_tech/widgets/product_card_widget/main.dart';
+import 'package:power_tech/widgets/product_card_widget.dart';
 
-class ProductsWidget extends StatefulWidget {
-  const ProductsWidget({
+class VerticalProductListWidget extends StatefulWidget {
+  const VerticalProductListWidget({
     super.key,
     required this.productsCard,
     required this.scrollController,
@@ -19,10 +19,11 @@ class ProductsWidget extends StatefulWidget {
   final bool conditionToSkip;
 
   @override
-  State<ProductsWidget> createState() => _ProductsWidgetState();
+  State<VerticalProductListWidget> createState() =>
+      _VerticalProductListWidgetState();
 }
 
-class _ProductsWidgetState extends State<ProductsWidget> {
+class _VerticalProductListWidgetState extends State<VerticalProductListWidget> {
   @override
   void initState() {
     super.initState();
