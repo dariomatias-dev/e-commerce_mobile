@@ -7,10 +7,10 @@ import 'package:power_tech/services/api_services.dart';
 import 'package:power_tech/models/products_card_navigation_model.dart';
 import 'package:power_tech/models/product_card_model.dart';
 
-import 'package:power_tech/widgets/ProductListWidget/products_widget.dart';
+import 'package:power_tech/widgets/vertical_list_products_widget/products_widget.dart';
 
-class ProductListWidget extends StatefulWidget {
-  const ProductListWidget({
+class VerticalListProductsWidget extends StatefulWidget {
+  const VerticalListProductsWidget({
     super.key,
     required this.routeName,
     this.productId,
@@ -22,10 +22,10 @@ class ProductListWidget extends StatefulWidget {
   final String? categoryIds;
 
   @override
-  State<ProductListWidget> createState() => _ProductListWidgetState();
+  State<VerticalListProductsWidget> createState() => _VerticalListProductsWidgetState();
 }
 
-class _ProductListWidgetState extends State<ProductListWidget> {
+class _VerticalListProductsWidgetState extends State<VerticalListProductsWidget> {
   final APIServices apiServices = APIServices();
   final ValueNotifier<ProductsCardNavigationModel?> productsCardNavigation =
       ValueNotifier<ProductsCardNavigationModel?>(null);
@@ -50,7 +50,7 @@ class _ProductListWidgetState extends State<ProductListWidget> {
           ? "?productId=${widget.productId}&categoryIds=${widget.categoryIds}"
           : "";
       final String url = "${widget.routeName}/amount$categoryIdsParam";
-      var result = await apiServices.fetchData(url);
+      var result = await apiServices.get(url);
       amountOfProducts = int.parse(result);
     } catch (err) {
       developer.log(
@@ -66,7 +66,7 @@ class _ProductListWidgetState extends State<ProductListWidget> {
           ? "&productId=${widget.productId}&categoryIds=${widget.categoryIds}"
           : "";
       final String url = "${widget.routeName}?skip=$skip$categoryIdsParam";
-      var result = await apiServices.fetchData(url);
+      var result = await apiServices.get(url);
       Map<String, dynamic> data = jsonDecode(result);
 
       final ProductsCardNavigationModel productsCardNavigationData =

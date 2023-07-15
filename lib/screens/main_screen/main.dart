@@ -69,6 +69,7 @@ class _MainScreenState extends State<MainScreen> {
             child: Icon(Icons.menu),
           ),
         ),
+        title: const Text("Power Tech"),
         backgroundColor: Colors.black,
       ),
       drawer: const DrawerWidget(),

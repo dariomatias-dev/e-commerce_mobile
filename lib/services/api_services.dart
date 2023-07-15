@@ -3,7 +3,7 @@ import "package:http/http.dart" as http;
 import "dart:convert";
 
 class APIServices {
-  Future<String> fetchData(String path) async {
+  Future<String> get(String path) async {
     String url = "${dotenv.env["API_URL"]}/$path";
     final response = await http.get(Uri.parse(url));
 
@@ -11,48 +11,68 @@ class APIServices {
       return response.body;
     } else {
       throw Exception(
-        "Failed fetch data. Status code ${response.statusCode}",
+        "Error getting data. Status code ${response.statusCode}",
       );
     }
   }
 
-  Future<void> createData(String path, Map<String, dynamic> body) async {
+  Future<void> post(String path, Map<String, dynamic> body) async {
     String url = "${dotenv.env["API_URL"]}/$path";
 
     final response = await http.post(
       Uri.parse(url),
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       },
       body: jsonEncode(body),
     );
 
     handleResponseError(
       response,
-      "Failed create data. Status code ${response.statusCode}",
+      "Error creating a new resource. Status code ${response.statusCode}",
     );
   }
 
-  Future<void> updateData(String path, Map<String, dynamic> body) async {
+  Future<void> patch(String path, Map<String, dynamic> body) async {
     String url = "${dotenv.env["API_URL"]}/$path";
     final response = await http.patch(
       Uri.parse(url),
-      body: body,
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: jsonEncode(body),
     );
 
     handleResponseError(
       response,
-      "Failed update data. Status code ${response.statusCode}",
+      "Error partially updating the data. Status code ${response.statusCode}",
     );
   }
 
-  Future<void> deleteData(String path) async {
+  Future<void> put(String path, Map<String, dynamic> body) async {
+    String url = "${dotenv.env["API_URL"]}/$path";
+
+    final response = await http.put(
+      Uri.parse(url),
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: jsonEncode(body),
+    );
+
+    handleResponseError(
+      response,
+      "Error when completely updating the data. Status code ${response.statusCode}",
+    );
+  }
+
+  Future<void> delete(String path) async {
     String url = "${dotenv.env["API_URL"]}/$path";
     final response = await http.delete(Uri.parse(url));
 
     handleResponseError(
       response,
-      "Failed delete data. Status code ${response.statusCode}",
+      "Error deleting data. Status code ${response.statusCode}",
     );
   }
 

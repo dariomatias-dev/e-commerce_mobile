@@ -3,18 +3,18 @@ import 'package:flutter/material.dart';
 class UserPreferencesInherited extends InheritedWidget {
   const UserPreferencesInherited({
     super.key,
-    required this.favoriteProducts,
-    required this.updateFavoriteProducts,
-    required this.cartProducts,
-    required this.updateCartProducts,
+    required this.wishlistProductIds,
+    required this.updateWishlistProductIds,
+    required this.cartProductIds,
+    required this.updateCartProductIds,
     required Widget child,
   }) : super(child: child);
 
-  final List<String> favoriteProducts;
-  final Function(List<String>) updateFavoriteProducts;
+  final List<String> wishlistProductIds;
+  final Function(List<String>) updateWishlistProductIds;
 
-  final List<String> cartProducts;
-  final Function(List<String>) updateCartProducts;
+  final List<String> cartProductIds;
+  final Function(List<String>) updateCartProductIds;
 
   static UserPreferencesInherited? of(BuildContext context) {
     return context

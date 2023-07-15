@@ -5,7 +5,7 @@ import 'package:power_tech/models/product_card_model.dart';
 
 import 'package:power_tech/screens/product_screen/main.dart';
 
-import 'package:power_tech/widgets/ProductListWidget/product_card_widget/wishlist_button_widget.dart';
+import 'package:power_tech/widgets/product_card_widget/wishlist_button_widget.dart';
 
 import 'package:power_tech/utils/format_to_real.dart';
 

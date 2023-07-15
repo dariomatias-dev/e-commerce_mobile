@@ -35,7 +35,7 @@ class _ProductScreenState extends State<ProductScreen> {
 
   Future<void> getProduct() async {
     try {
-      var response = await apiServices.fetchData("product/${widget.productId}");
+      var response = await apiServices.get("product/${widget.productId}");
       Map<String, dynamic> data = jsonDecode(response);
 
       product.value = ProductModel.fromMap(data);

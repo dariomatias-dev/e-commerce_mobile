@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:power_tech/widgets/ProductListWidget/main.dart';
+import 'package:power_tech/widgets/vertical_list_products_widget/main.dart';
 
 class SimilarProductsWidget extends StatefulWidget {
   const SimilarProductsWidget({
@@ -43,7 +43,7 @@ class _SimilarProductsWidgetState extends State<SimilarProductsWidget> {
             ),
           ),
           const SizedBox(height: 4),
-          ProductListWidget(
+          VerticalListProductsWidget(
             routeName: routeName,
             productId: widget.productId,
             categoryIds: widget.categoryIds.join(","),

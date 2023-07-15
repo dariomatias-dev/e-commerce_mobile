@@ -24,8 +24,8 @@ class UserPreferencesManager {
     late String actionType;
 
     List<String> productIds = listType == "wishlist"
-        ? userPreferencesInherited.favoriteProducts
-        : userPreferencesInherited.cartProducts;
+        ? userPreferencesInherited.wishlistProductIds
+        : userPreferencesInherited.cartProductIds;
 
     if (productIds.contains(productId)) {
       productIds.remove(productId);
@@ -36,8 +36,8 @@ class UserPreferencesManager {
     }
 
     listType == "wishlist"
-        ? userPreferencesInherited.updateFavoriteProducts(productIds)
-        : userPreferencesInherited.updateCartProducts(productIds);
+        ? userPreferencesInherited.updateWishlistProductIds(productIds)
+        : userPreferencesInherited.updateCartProductIds(productIds);
 
     sendNewProductIds(
       productIds,
@@ -56,10 +56,11 @@ class UserPreferencesManager {
     };
 
     try {
-      await apiServices.createData(
+      await apiServices.put(
         "$listType/f681f544-20ec-11ee-be56-0242ac120002",
-        body,
+        body, 
       );
+
       sendSuccessMessage(actionType);
     } catch (err) {
       developer.log(

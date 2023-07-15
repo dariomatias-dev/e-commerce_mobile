@@ -5,7 +5,9 @@ import 'dart:convert';
 
 import 'package:power_tech/providers/user_preferences_inherited.dart';
 
+import 'package:power_tech/screens/cart_screen/main.dart';
 import 'package:power_tech/screens/main_screen/main.dart';
+import 'package:power_tech/screens/wishlist_screen/main.dart';
 
 import 'package:power_tech/services/api_services.dart';
 
@@ -24,24 +26,24 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   final APIServices apiServices = APIServices();
-  List<String>? favoriteProducts;
-  List<String>? cartProducts;
+  List<String>? wishlistProductIds;
+  List<String>? cartProductIds;
 
   @override
   void initState() {
     super.initState();
-    fetchFavoriteProducts();
-    fetchCartProducts();
+    fetchWishlistProductIds();
+    fetchCartProductIds();
   }
 
-  Future<void> fetchFavoriteProducts() async {
+  Future<void> fetchWishlistProductIds() async {
     try {
-      var response = await apiServices.fetchData(
+      var response = await apiServices.get(
         "wishlist/f681f544-20ec-11ee-be56-0242ac120002",
       );
 
       if (jsonDecode(response) != null) {
-        favoriteProducts =
+        wishlistProductIds =
             (jsonDecode(response) as List<dynamic>).cast<String>();
       }
     } catch (err) {
@@ -52,14 +54,14 @@ class _MyAppState extends State<MyApp> {
     }
   }
 
-  Future<void> fetchCartProducts() async {
+  Future<void> fetchCartProductIds() async {
     try {
-      var response = await apiServices.fetchData(
+      var response = await apiServices.get(
         "cart/f681f544-20ec-11ee-be56-0242ac120002",
       );
 
       if (jsonDecode(response) != null) {
-        cartProducts = (jsonDecode(response) as List<dynamic>).cast<String>();
+        cartProductIds = (jsonDecode(response) as List<dynamic>).cast<String>();
       }
     } catch (err) {
       developer.log(
@@ -69,21 +71,21 @@ class _MyAppState extends State<MyApp> {
     }
   }
 
-  void updateFavoriteProducts(List<String> newFavoriteProducts) {
-    favoriteProducts = newFavoriteProducts;
+  void updateWishlistProductIds(List<String> newFavoriteProducts) {
+    wishlistProductIds = newFavoriteProducts;
   }
 
-  void updateCartProducts(List<String> newCartProducts) {
-    cartProducts = newCartProducts;
+  void updateCartProductIds(List<String> newCartProductIds) {
+    cartProductIds = newCartProductIds;
   }
 
   @override
   Widget build(BuildContext context) {
     return UserPreferencesInherited(
-      favoriteProducts: favoriteProducts ?? [],
-      updateFavoriteProducts: updateFavoriteProducts,
-      cartProducts: cartProducts ?? [],
-      updateCartProducts: updateCartProducts,
+      wishlistProductIds: wishlistProductIds ?? [],
+      updateWishlistProductIds: updateWishlistProductIds,
+      cartProductIds: cartProductIds ?? [],
+      updateCartProductIds: updateCartProductIds,
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: "Power Tech App",
@@ -93,6 +95,8 @@ class _MyAppState extends State<MyApp> {
         initialRoute: "/",
         routes: {
           "/": (context) => const MainScreen(),
+          "wishlistScreen": (context) => const WishlistScreen(),
+          "cartScreen": (context) => const CartScreen(),
         },
       ),
     );
