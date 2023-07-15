@@ -58,7 +58,7 @@ class UserPreferencesManager {
     try {
       await apiServices.put(
         "$listType/f681f544-20ec-11ee-be56-0242ac120002",
-        body, 
+        body,
       );
 
       sendSuccessMessage(actionType);

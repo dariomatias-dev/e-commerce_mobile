@@ -26,6 +26,7 @@ class ProductCardWidget extends StatelessWidget {
       ),
       child: Container(
         width: 150,
+        height: 240,
         padding: const EdgeInsets.symmetric(
           vertical: 6,
           horizontal: 10,

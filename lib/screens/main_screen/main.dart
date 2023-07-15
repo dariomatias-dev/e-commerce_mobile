@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 
 import 'package:power_tech/providers/main_screen_context_inherited.dart';
+import 'package:power_tech/screens/cart_screen/main.dart';
 
 import 'package:power_tech/screens/main_screen/drawer_widget/main.dart';
 import 'package:power_tech/screens/main_screen/bottomnavigationbar_main_widget.dart';
 import 'package:power_tech/screens/home_screen/main.dart';
+import 'package:power_tech/screens/wishlist_screen/main.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -20,24 +22,8 @@ class _MainScreenState extends State<MainScreen> {
 
   final List<Widget> _screens = [
     const HomeScreen(),
-    const Center(
-      child: Text(
-        "Favoritos",
-        style: TextStyle(
-          fontSize: 20,
-          fontWeight: FontWeight.bold,
-        ),
-      ),
-    ),
-    const Center(
-      child: Text(
-        "Carrinho",
-        style: TextStyle(
-          fontSize: 20,
-          fontWeight: FontWeight.bold,
-        ),
-      ),
-    ),
+    const WishlistScreen(),
+    const CartScreen(),
     const Center(
       child: Text(
         "Configurações",

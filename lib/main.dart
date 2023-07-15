@@ -5,9 +5,7 @@ import 'dart:convert';
 
 import 'package:power_tech/providers/user_preferences_inherited.dart';
 
-import 'package:power_tech/screens/cart_screen/main.dart';
 import 'package:power_tech/screens/main_screen/main.dart';
-import 'package:power_tech/screens/wishlist_screen/main.dart';
 
 import 'package:power_tech/services/api_services.dart';
 
@@ -42,10 +40,10 @@ class _MyAppState extends State<MyApp> {
         "wishlist/f681f544-20ec-11ee-be56-0242ac120002",
       );
 
-      if (jsonDecode(response) != null) {
+      setState(() {
         wishlistProductIds =
             (jsonDecode(response) as List<dynamic>).cast<String>();
-      }
+      });
     } catch (err) {
       developer.log(
         "An excess occurred: $err",
@@ -60,9 +58,9 @@ class _MyAppState extends State<MyApp> {
         "cart/f681f544-20ec-11ee-be56-0242ac120002",
       );
 
-      if (jsonDecode(response) != null) {
+      setState(() {
         cartProductIds = (jsonDecode(response) as List<dynamic>).cast<String>();
-      }
+      });
     } catch (err) {
       developer.log(
         "An excess occurred: $err",
@@ -71,12 +69,16 @@ class _MyAppState extends State<MyApp> {
     }
   }
 
-  void updateWishlistProductIds(List<String> newFavoriteProducts) {
-    wishlistProductIds = newFavoriteProducts;
+  void updateWishlistProductIds(List<String> newWishlistProductIds) {
+    setState(() {
+      wishlistProductIds = newWishlistProductIds;
+    });
   }
 
   void updateCartProductIds(List<String> newCartProductIds) {
-    cartProductIds = newCartProductIds;
+    setState(() {
+      cartProductIds = newCartProductIds;
+    });
   }
 
   @override
@@ -95,8 +97,6 @@ class _MyAppState extends State<MyApp> {
         initialRoute: "/",
         routes: {
           "/": (context) => const MainScreen(),
-          "wishlistScreen": (context) => const WishlistScreen(),
-          "cartScreen": (context) => const CartScreen(),
         },
       ),
     );
