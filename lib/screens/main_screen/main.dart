@@ -4,7 +4,7 @@ import 'package:power_tech/providers/main_screen_context_inherited.dart';
 
 import 'package:power_tech/screens/cart_screen/main.dart';
 import 'package:power_tech/screens/home_screen/main.dart';
-import 'package:power_tech/screens/main_screen/bottomnavigationbar_main_widget.dart';
+import 'package:power_tech/screens/main_screen/components/bottomnavigationbar_main_widget.dart';
 import 'package:power_tech/screens/wishlist_screen/main.dart';
 
 class MainScreen extends StatefulWidget {

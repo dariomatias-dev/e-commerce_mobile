@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:power_tech/screens/product_screen/bottomnavigationbar_product_widget/cart_button_widget.dart';
+import 'package:power_tech/screens/product_screen/components/bottomnavigationbar_product_widget/cart_button_widget.dart';
 
 class BottomNavigationBarProductWidget extends StatelessWidget {
   const BottomNavigationBarProductWidget({

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'package:power_tech/screens/home_screen/section_products/main.dart';
-import 'package:power_tech/screens/main_screen/drawer_widget/main.dart';
+import 'package:power_tech/screens/home_screen/components/section_products/main.dart';
+import 'package:power_tech/screens/main_screen/components/drawer_widget/main.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});

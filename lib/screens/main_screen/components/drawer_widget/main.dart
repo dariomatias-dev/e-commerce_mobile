@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'package:power_tech/screens/main_screen/drawer_widget/main_navigation.dart';
-import 'package:power_tech/screens/main_screen/drawer_widget/other_options.dart';
+import 'package:power_tech/screens/main_screen/components/drawer_widget/main_navigation.dart';
+import 'package:power_tech/screens/main_screen/components/drawer_widget/other_options.dart';
 
 class DrawerWidget extends StatelessWidget {
   const DrawerWidget({super.key});

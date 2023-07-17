@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'package:power_tech/screens/product_screen/infos_widget/payment_calculator_widget.dart';
-import 'package:power_tech/screens/product_screen/infos_widget/product_quantity_picker_widget.dart';
+import 'package:power_tech/screens/product_screen/components/divider_widget.dart';
+import 'package:power_tech/screens/product_screen/components/infos_widget/payment_calculator_widget.dart';
+import 'package:power_tech/screens/product_screen/components/infos_widget/product_quantity_picker_widget.dart';
 
 class ProductDetailsWidget extends StatefulWidget {
   const ProductDetailsWidget({
@@ -83,13 +84,7 @@ class _ProductDetailsWidgetState extends State<ProductDetailsWidget> {
             ],
           ),
         ),
-        Container(
-          width: MediaQuery.of(context).size.width,
-          height: 6,
-          decoration: BoxDecoration(
-            color: Colors.grey.shade100,
-          ),
-        ),
+        const DividerWidget(),
         PriceOptionsWidget(
           price: widget.price,
           productQuantity: productQuantity,

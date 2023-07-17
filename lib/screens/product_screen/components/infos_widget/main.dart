@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'package:power_tech/screens/product_screen/infos_widget/product_details_widget.dart';
-import 'package:power_tech/screens/product_screen/infos_widget/similar_products_widget.dart';
+import 'package:power_tech/screens/product_screen/components/divider_widget.dart';
+import 'package:power_tech/screens/product_screen/components/infos_widget/product_details_widget.dart';
+import 'package:power_tech/screens/product_screen/components/infos_widget/similar_products_widget.dart';
 
 class InfosWidget extends StatelessWidget {
   const InfosWidget({
@@ -46,13 +47,7 @@ class InfosWidget extends StatelessWidget {
             description: description,
             price: price,
           ),
-          Container(
-            width: MediaQuery.of(context).size.width,
-            height: 6,
-            decoration: BoxDecoration(
-              color: Colors.grey.shade100,
-            ),
-          ),
+          const DividerWidget(),
           SimilarProductsWidget(
             productId: productId,
             categoryIds: categoryIds,

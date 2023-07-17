@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:power_tech/screens/home_screen/section_products/filter_selector_widget.dart';
+import 'package:power_tech/screens/home_screen/components/section_products/filter_selector_widget.dart';
 
 import 'package:power_tech/widgets/vertical_list_products_widget/main.dart';
 
