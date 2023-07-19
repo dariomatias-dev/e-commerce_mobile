@@ -40,9 +40,9 @@ class _WishlistScreenState extends State<WishlistScreen> {
 
     try {
       final String url =
-          "wishlist-products?skip=$skip&productIds=${productIds.join(",")}";
+          "products-by-ids?skip=$skip&productIds=${productIds.join(",")}";
       var result = await apiServices.get(url);
-      Map<String, dynamic> data = jsonDecode(result);
+      final Map<String, dynamic> data = jsonDecode(result);
 
       final ProductsCardNavigationModel productsCardNavigationData =
           ProductsCardNavigationModel.fromMap(data);

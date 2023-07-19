@@ -59,7 +59,7 @@ class UserPreferencesManager {
 
     try {
       await apiServices.put(
-        "$listType/f681f544-20ec-11ee-be56-0242ac120002",
+        "$listType/57e99e52-753e-4da7-8a67-a6286edd2ee4",
         body,
       );
 

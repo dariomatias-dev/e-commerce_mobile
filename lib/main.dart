@@ -37,7 +37,7 @@ class _MyAppState extends State<MyApp> {
   Future<void> fetchWishlistProductIds() async {
     try {
       var response = await apiServices.get(
-        "wishlist/f681f544-20ec-11ee-be56-0242ac120002",
+        "wishlist/57e99e52-753e-4da7-8a67-a6286edd2ee4",
       );
 
       setState(() {
@@ -55,7 +55,7 @@ class _MyAppState extends State<MyApp> {
   Future<void> fetchCartProductIds() async {
     try {
       var response = await apiServices.get(
-        "cart/f681f544-20ec-11ee-be56-0242ac120002",
+        "cart/57e99e52-753e-4da7-8a67-a6286edd2ee4",
       );
 
       setState(() {
