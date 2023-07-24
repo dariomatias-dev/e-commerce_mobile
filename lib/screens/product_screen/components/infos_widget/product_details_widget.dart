@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:power_tech/screens/product_screen/components/divider_widget.dart';
 import 'package:power_tech/screens/product_screen/components/infos_widget/payment_calculator_widget.dart';
-import 'package:power_tech/screens/product_screen/components/infos_widget/product_quantity_picker_widget.dart';
+import 'package:power_tech/widgets/product_quantity_picker_widget.dart';
 
 class ProductDetailsWidget extends StatefulWidget {
   const ProductDetailsWidget({
