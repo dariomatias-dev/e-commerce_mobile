@@ -7,6 +7,7 @@ import 'package:power_tech/screens/product_screen/main.dart';
 
 import 'package:power_tech/widgets/wishlist_button_widget.dart';
 
+import 'package:power_tech/utils/format_string.dart';
 import 'package:power_tech/utils/format_to_real.dart';
 
 class ProductCardWidget extends StatelessWidget {
@@ -21,6 +22,8 @@ class ProductCardWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final double price = double.parse(productCard.price);
     final String formattedPrice = formatToReal(price);
+    final String productName = productCard.name;
+    final String formattedProductName = formatString(productName);
 
     return Card(
       elevation: 5,
@@ -64,7 +67,7 @@ class ProductCardWidget extends StatelessWidget {
                           maxHeight: 120,
                         ),
                         child: Image.network(
-                          "${dotenv.env["IMAGE_URL"]}/${productCard.imageUrlId}.jpg",
+                          "${dotenv.env["PRODUCT_IMAGES_BASE_URL"]}/$formattedProductName/${formattedProductName}_1.png",
                           width: 100,
                         ),
                       ),

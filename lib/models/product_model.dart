@@ -3,7 +3,7 @@ class ProductModel {
   final String name;
   final String price;
   final String description;
-  final List<String> imageUrlIds;
+  final int amountOfImages;
   final List<String> categoryIds;
 
   ProductModel({
@@ -11,7 +11,7 @@ class ProductModel {
     required this.name,
     required this.price,
     required this.description,
-    required this.imageUrlIds,
+    required this.amountOfImages,
     required this.categoryIds,
   });
 
@@ -21,7 +21,7 @@ class ProductModel {
       name: map["name"] ?? "",
       price: map["price"] ?? "",
       description: map["description"] ?? "",
-      imageUrlIds: (map["imageUrlIds"] as List<dynamic>).cast<String>(),
+      amountOfImages: map["amountOfImages"] ?? 0,
       categoryIds: (map["categoryIds"] as List<dynamic>).cast<String>(),
     );
   }

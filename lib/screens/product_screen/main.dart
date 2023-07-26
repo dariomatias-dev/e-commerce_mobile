@@ -79,7 +79,8 @@ class _ProductScreenState extends State<ProductScreen> {
                       productId: id,
                     ),
                     CarouselImagesWidget(
-                      imageUrlIds: value.imageUrlIds,
+                      productName: value.name,
+                      amountOfImages: value.amountOfImages,
                     ),
                     InfosWidget(
                       productId: id,

@@ -56,7 +56,7 @@ class CartProductCardWidgetState extends State<CartProductCardWidget> {
               maxWidth: 70,
             ),
             child: Image.network(
-              "${dotenv.env["IMAGE_URL"]}/52974159533_a614b9cd45_w.jpg",
+              "${dotenv.env["PRODUCT_IMAGES_BASE_URL"]}/rtx-4090-aorus-xtreme-waterforce/rtx-4090-aorus-xtreme-waterforce_1.png",
             ),
           ),
           const SizedBox(width: 14),
