@@ -4,6 +4,7 @@ import "dart:developer" as developer;
 
 import 'package:power_tech/models/products_card_navigation_model.dart';
 import 'package:power_tech/models/product_card_model.dart';
+import 'package:power_tech/providers/product_screen_context_inherited.dart';
 
 import 'package:power_tech/services/api_services.dart';
 
@@ -92,15 +93,26 @@ class _VerticalListProductsWidgetState
         productsCard: productsCard,
       );
 
-      setState(() {
-        productsCardNavigation.value = newProductsCardNavigation;
-      });
+      final bool thereAreSimilarProducts =
+          newProductsCardNavigation.productsCard.isNotEmpty;
+      updateThereAreSimilarProducts(thereAreSimilarProducts);
+
+      if (thereAreSimilarProducts) {
+        setState(() {
+          productsCardNavigation.value = newProductsCardNavigation;
+        });
+      }
     } catch (err) {
       developer.log(
         "An excess occurred: $err",
         error: err,
       );
     }
+  }
+
+  void updateThereAreSimilarProducts(bool thereAreSimilarProducts) {
+    ProductScreenInfoInherited.of(context)
+        ?.chanceThereAreSimilarProducts(thereAreSimilarProducts);
   }
 
   void loadMoreProducts() {

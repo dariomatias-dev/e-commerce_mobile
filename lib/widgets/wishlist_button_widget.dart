@@ -33,7 +33,7 @@ class WishlistButtonWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final BuildContext screenContext =
         MainScreenContextInherited.of(context)?.screenContext ??
-            ProductScreenContextInherited.of(context)!.screenContext;
+            ProductScreenInfoInherited.of(context)!.screenContext;
     final List<String> productIds =
         UserPreferencesInherited.of(context)?.wishlistProductIds ?? [];
 

@@ -30,7 +30,7 @@ class CartButtonWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final BuildContext screenContext =
-        ProductScreenContextInherited.of(context)!.screenContext;
+        ProductScreenInfoInherited.of(context)!.screenContext;
 
     return InkWell(
       onTap: () => updateUserPreferences(

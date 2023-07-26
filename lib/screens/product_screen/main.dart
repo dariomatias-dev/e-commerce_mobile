@@ -29,6 +29,7 @@ class _ProductScreenState extends State<ProductScreen> {
   final APIServices apiServices = APIServices();
   final ValueNotifier<ProductModel?> product =
       ValueNotifier<ProductModel?>(null);
+  bool thereAreSimilarProducts = true;
 
   @override
   void initState() {
@@ -50,6 +51,12 @@ class _ProductScreenState extends State<ProductScreen> {
     }
   }
 
+  void chanceThereAreSimilarProducts(bool value) {
+    setState(() {
+      thereAreSimilarProducts = value;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder(
@@ -65,8 +72,10 @@ class _ProductScreenState extends State<ProductScreen> {
 
         final String id = value.id;
 
-        return ProductScreenContextInherited(
+        return ProductScreenInfoInherited(
           screenContext: context,
+          thereAreSimilarProducts: thereAreSimilarProducts,
+          chanceThereAreSimilarProducts: chanceThereAreSimilarProducts,
           child: Scaffold(
             body: ScrollConfiguration(
               behavior: ScrollConfiguration.of(context).copyWith(

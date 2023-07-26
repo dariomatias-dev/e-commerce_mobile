@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:power_tech/providers/product_screen_context_inherited.dart';
 
 import 'package:power_tech/screens/product_screen/components/divider_widget.dart';
 import 'package:power_tech/screens/product_screen/components/infos_widget/product_details_widget.dart';
@@ -22,6 +23,9 @@ class InfosWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final bool thereAreSimilarProducts =
+        ProductScreenInfoInherited.of(context)!.thereAreSimilarProducts;
+
     return Container(
       padding: const EdgeInsets.symmetric(
         vertical: 20,
@@ -40,20 +44,26 @@ class InfosWidget extends StatelessWidget {
           ),
         ],
       ),
-      child: Column(
-        children: [
-          ProductDetailsWidget(
-            name: name,
-            description: description,
-            price: price,
-          ),
-          const DividerWidget(),
-          SimilarProductsWidget(
-            productId: productId,
-            categoryIds: categoryIds,
-          ),
-        ],
-      ),
+      child: thereAreSimilarProducts
+          ? Column(
+              children: [
+                ProductDetailsWidget(
+                  name: name,
+                  description: description,
+                  price: price,
+                ),
+                const DividerWidget(),
+                SimilarProductsWidget(
+                  productId: productId,
+                  categoryIds: categoryIds,
+                ),
+              ],
+            )
+          : ProductDetailsWidget(
+              name: name,
+              description: description,
+              price: price,
+            ),
     );
   }
 }
