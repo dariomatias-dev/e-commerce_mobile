@@ -22,8 +22,8 @@ class _SimilarProductsWidgetState extends State<SimilarProductsWidget> {
     const String routeName = "products-by-category-ids";
 
     return Container(
-      padding: const EdgeInsets.only(
-        top: 16,
+      padding: const EdgeInsets.symmetric(
+        vertical: 16,
       ),
       decoration: const BoxDecoration(
         color: Colors.white,

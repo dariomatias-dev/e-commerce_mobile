@@ -10,9 +10,13 @@ class WishlistButtonWidget extends StatelessWidget {
   const WishlistButtonWidget({
     super.key,
     required this.productId,
+    required this.padding,
+    required this.containerDecoration,
   });
 
   final String productId;
+  final double padding;
+  final BoxDecoration containerDecoration;
 
   void updateUserPreferences(
     String productId,
@@ -44,19 +48,8 @@ class WishlistButtonWidget extends StatelessWidget {
         screenContext,
       ),
       child: Container(
-        padding: const EdgeInsets.all(6),
-        decoration: BoxDecoration(
-          color: Colors.black,
-          shape: BoxShape.circle,
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey.withOpacity(0.5),
-              spreadRadius: 2,
-              blurRadius: 4,
-              offset: const Offset(0, 3),
-            ),
-          ],
-        ),
+        padding: EdgeInsets.all(padding),
+        decoration: containerDecoration,
         child: Tooltip(
           message: "Favorito",
           child: Icon(
@@ -65,7 +58,7 @@ class WishlistButtonWidget extends StatelessWidget {
                 : Icons.favorite_outline,
             color: productIds.contains(productId)
                 ? Colors.white.withOpacity(0.9)
-                : Colors.white54,
+                : Colors.white60,
             size: 20,
           ),
         ),

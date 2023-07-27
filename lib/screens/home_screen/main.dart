@@ -29,7 +29,7 @@ class _HomeScreenState extends State<HomeScreen> {
               widthFactor: 0.35,
               heightFactor: 0.35,
               child: Image.asset(
-                "assets/icons/menu_icon_1.png",
+                "assets/icons/menu_icon.png",
                 width: 4,
               ),
             ),

@@ -6,10 +6,13 @@ import 'package:power_tech/models/product_model.dart';
 
 import 'package:power_tech/providers/product_screen_context_inherited.dart';
 
+import 'package:power_tech/screens/product_screen/components/announcement_widget.dart';
 import 'package:power_tech/screens/product_screen/components/carousel_images_widget.dart';
-import 'package:power_tech/screens/product_screen/components/floating_action_widget.dart';
+import 'package:power_tech/screens/product_screen/components/floating_action_button_widget.dart';
 import 'package:power_tech/screens/product_screen/components/header_widget.dart';
 import 'package:power_tech/screens/product_screen/components/infos_widget/main.dart';
+
+import 'package:power_tech/widgets/divider_widget.dart';
 
 import 'package:power_tech/services/api_services.dart';
 
@@ -98,11 +101,13 @@ class _ProductScreenState extends State<ProductScreen> {
                       description: value.description,
                       categoryIds: value.categoryIds,
                     ),
+                    const DividerWidget(),
+                    const AnnouncementWidget(),
                   ],
                 ),
               ),
             ),
-            floatingActionButton: FloatingActionWidget(
+            floatingActionButton: FloatingActionButtonWidget(
               productId: id,
             ),
           ),

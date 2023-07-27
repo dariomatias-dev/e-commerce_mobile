@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:power_tech/screens/cart_screen/components/card_product_widget.dart';
 
 class CartScreen extends StatefulWidget {
@@ -16,11 +17,7 @@ class _CartScreenState extends State<CartScreen> {
         elevation: 0,
         backgroundColor: Colors.white,
       ),
-      body: const Column(
-        children: [
-          CartProductCardWidget(),
-        ],
-      ),
+      body: const CartProductCardWidget(),
     );
   }
 }

@@ -53,7 +53,7 @@ class _VerticalProductListWidgetState extends State<VerticalProductListWidget> {
     final productsCard = widget.productsCard;
 
     return SizedBox(
-      height: 254,
+      height: 220,
       child: ListView.builder(
         padding: const EdgeInsets.only(
           bottom: 4,

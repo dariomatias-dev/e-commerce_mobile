@@ -4,8 +4,8 @@ import 'package:power_tech/managers/user_preferences_manager.dart';
 
 import 'package:power_tech/providers/product_screen_context_inherited.dart';
 
-class FloatingActionWidget extends StatelessWidget {
-  const FloatingActionWidget({
+class FloatingActionButtonWidget extends StatelessWidget {
+  const FloatingActionButtonWidget({
     super.key,
     required this.productId,
   });
@@ -39,9 +39,14 @@ class FloatingActionWidget extends StatelessWidget {
         screenContext,
       ),
       backgroundColor: Colors.black,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(18),
+      ),
       child: const Tooltip(
         message: "Carrinho",
-        child: Icon(Icons.shopping_cart),
+        child: Icon(
+          Icons.shopping_cart,
+        ),
       ),
     );
   }

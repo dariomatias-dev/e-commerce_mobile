@@ -75,6 +75,19 @@ class HeaderWidget extends StatelessWidget {
           ),
           WishlistButtonWidget(
             productId: productId,
+            padding: 6,
+            containerDecoration: BoxDecoration(
+              color: Colors.black,
+              shape: BoxShape.circle,
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.3),
+                  spreadRadius: 2,
+                  blurRadius: 4,
+                  offset: const Offset(0, 3),
+                ),
+              ],
+            ),
           ),
         ],
       ),

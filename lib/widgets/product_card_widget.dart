@@ -28,104 +28,88 @@ class ProductCardWidget extends StatelessWidget {
     return Card(
       elevation: 5,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(20),
       ),
       child: Container(
-        width: 150,
-        height: 240,
-        padding: const EdgeInsets.symmetric(
-          vertical: 6,
-          horizontal: 10,
+        margin: const EdgeInsets.only(
+          top: 10,
         ),
+        width: 140,
+        height: 150.5,
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            Stack(
-              children: [
-                Center(
-                  child: GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) {
-                            return ProductScreen(
-                              productId: productCard.id,
-                            );
-                          },
-                        ),
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return ProductScreen(
+                        productId: productCard.id,
                       );
                     },
-                    child: Container(
-                      margin: const EdgeInsets.symmetric(
-                        vertical: 10,
-                      ),
-                      child: ConstrainedBox(
-                        constraints: const BoxConstraints(
-                          minHeight: 90,
-                          maxHeight: 120,
-                        ),
-                        child: Image.network(
-                          "${dotenv.env["PRODUCT_IMAGES_BASE_URL"]}/$formattedProductName/${formattedProductName}_1.png",
-                          width: 100,
-                        ),
+                  ),
+                );
+              },
+              child: Container(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 10,
+                ),
+                height: 90,
+                child: Center(
+                  child: Image.network(
+                    "${dotenv.env["PRODUCT_IMAGES_BASE_URL"]}/$formattedProductName/${formattedProductName}_1.png",
+                    width: 100,
+                  ),
+                ),
+              ),
+            ),
+            const SizedBox(height: 14),
+            Padding(
+              padding: const EdgeInsets.only(
+                left: 10,
+              ),
+              child: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(
+                      right: 10,
+                    ),
+                    child: Text(
+                      productName,
+                      style: const TextStyle(
+                        color: Colors.black87,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w700,
                       ),
                     ),
                   ),
-                ),
-                Positioned(
-                  right: 0,
-                  bottom: 4,
-                  child: WishlistButtonWidget(
-                    productId: productCard.id,
-                  ),
-                ),
-              ],
-            ),
-            Text(
-              productCard.name,
-              style: const TextStyle(
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            const SizedBox(height: 2),
-            Text(
-              formattedPrice,
-              style: const TextStyle(
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-            const SizedBox(height: 6),
-            Center(
-              child: InkWell(
-                onTap: () {},
-                child: Container(
-                  width: double.maxFinite,
-                  padding: const EdgeInsets.symmetric(
-                    vertical: 8,
-                  ),
-                  decoration: BoxDecoration(
-                    color: Colors.black,
-                    borderRadius: BorderRadius.circular(20),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey.withOpacity(0.5),
-                        spreadRadius: 4,
-                        blurRadius: 6,
-                        offset: const Offset(0, 3),
+                  const SizedBox(height: 6),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        formattedPrice,
+                        style: const TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w800,
+                        ),
+                      ),
+                      WishlistButtonWidget(
+                        productId: productCard.id,
+                        padding: 10,
+                        containerDecoration: const BoxDecoration(
+                          color: Colors.black,
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(20),
+                            bottomRight: Radius.circular(20),
+                          ),
+                        ),
                       ),
                     ],
-                  ),
-                  child: const Text(
-                    "Comprar",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
+                  )
+                ],
               ),
             ),
           ],
