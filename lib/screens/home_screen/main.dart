@@ -23,29 +23,33 @@ class _HomeScreenState extends State<HomeScreen> {
           onTap: () {
             _scaffoldKey.currentState?.openDrawer();
           },
-          child: const Tooltip(
+          child: Tooltip(
             message: "Abrir menu",
-            child: Icon(
-              Icons.menu,
-              color: Colors.black,
-              size: 32,
+            child: FractionallySizedBox(
+              widthFactor: 0.35,
+              heightFactor: 0.35,
+              child: Image.asset(
+                "assets/icons/menu_icon_1.png",
+                width: 4,
+              ),
             ),
           ),
         ),
+        centerTitle: true,
         title: const Text(
           "Power Tech",
           style: TextStyle(
             color: Colors.black,
-            fontWeight: FontWeight.w600,
+            fontSize: 14,
           ),
         ),
         backgroundColor: Colors.white,
-        actions: [
+        actions: const <Widget>[
           Icon(
-            Icons.notifications_none_sharp,
-            color: Colors.grey.shade800,
+            Icons.notifications,
+            color: Colors.black,
           ),
-          const SizedBox(width: 6),
+          SizedBox(width: 6),
         ],
       ),
       drawer: const DrawerWidget(),

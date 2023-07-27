@@ -6,8 +6,8 @@ import 'package:power_tech/models/product_model.dart';
 
 import 'package:power_tech/providers/product_screen_context_inherited.dart';
 
-import 'package:power_tech/screens/product_screen/components/bottomnavigationbar_product_widget/main.dart';
 import 'package:power_tech/screens/product_screen/components/carousel_images_widget.dart';
+import 'package:power_tech/screens/product_screen/components/floating_action_widget.dart';
 import 'package:power_tech/screens/product_screen/components/header_widget.dart';
 import 'package:power_tech/screens/product_screen/components/infos_widget/main.dart';
 
@@ -102,7 +102,7 @@ class _ProductScreenState extends State<ProductScreen> {
                 ),
               ),
             ),
-            bottomNavigationBar: BottomNavigationBarProductWidget(
+            floatingActionButton: FloatingActionWidget(
               productId: id,
             ),
           ),

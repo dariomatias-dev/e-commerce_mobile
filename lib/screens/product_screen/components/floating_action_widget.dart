@@ -4,8 +4,8 @@ import 'package:power_tech/managers/user_preferences_manager.dart';
 
 import 'package:power_tech/providers/product_screen_context_inherited.dart';
 
-class CartButtonWidget extends StatelessWidget {
-  const CartButtonWidget({
+class FloatingActionWidget extends StatelessWidget {
+  const FloatingActionWidget({
     super.key,
     required this.productId,
   });
@@ -32,23 +32,16 @@ class CartButtonWidget extends StatelessWidget {
     final BuildContext screenContext =
         ProductScreenInfoInherited.of(context)!.screenContext;
 
-    return InkWell(
-      onTap: () => updateUserPreferences(
+    return FloatingActionButton(
+      onPressed: () => updateUserPreferences(
         productId,
         context,
         screenContext,
       ),
-      child: Tooltip(
+      backgroundColor: Colors.black,
+      child: const Tooltip(
         message: "Carrinho",
-        child: Container(
-          width: 50,
-          height: 50,
-          decoration: BoxDecoration(
-            border: Border.all(),
-            shape: BoxShape.circle,
-          ),
-          child: const Icon(Icons.shopping_cart),
-        ),
+        child: Icon(Icons.shopping_cart),
       ),
     );
   }
