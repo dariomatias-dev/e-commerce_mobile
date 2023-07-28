@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:power_tech/screens/cart_screen/components/card_product_widget.dart';
+import 'package:power_tech/screens/cart_screen/components/card_product_widget/main.dart';
 
 class CartScreen extends StatefulWidget {
   const CartScreen({super.key});

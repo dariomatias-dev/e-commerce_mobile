@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+
 import 'package:power_tech/widgets/product_quantity_picker_widget.dart';
 
-class CartProductCardWidget extends StatefulWidget {
-  const CartProductCardWidget({super.key});
+class ProductCardItemWidget extends StatefulWidget {
+  const ProductCardItemWidget({super.key});
 
   @override
-  State<CartProductCardWidget> createState() => CartProductCardWidgetState();
+  State<ProductCardItemWidget> createState() => _ProductCardItemWidgetState();
 }
 
-class CartProductCardWidgetState extends State<CartProductCardWidget> {
+class _ProductCardItemWidgetState extends State<ProductCardItemWidget> {
   int productQuantity = 0;
 
   void increaseAmountProduct() {
@@ -31,10 +32,7 @@ class CartProductCardWidgetState extends State<CartProductCardWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.symmetric(
-        vertical: 10,
-        horizontal: 22,
-      ),
+      margin: const EdgeInsets.all(10),
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
         color: Colors.white,
