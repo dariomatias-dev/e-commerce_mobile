@@ -7,6 +7,9 @@ import 'package:power_tech/models/products_card_navigation_model.dart';
 
 import 'package:power_tech/providers/user_preferences_inherited.dart';
 
+import 'package:power_tech/screens/main_screen/components/drawer_widget/main.dart';
+
+import 'package:power_tech/widgets/open_drawer_button_widget.dart';
 import 'package:power_tech/widgets/product_card_widget.dart';
 
 import 'package:power_tech/services/api_services.dart';
@@ -19,7 +22,9 @@ class WishlistScreen extends StatefulWidget {
 }
 
 class _WishlistScreenState extends State<WishlistScreen> {
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   final APIServices apiServices = APIServices();
+
   final ValueNotifier<ProductsCardNavigationModel?> productsCardNavigation =
       ValueNotifier<ProductsCardNavigationModel?>(null);
   late final List<ProductCardModel> wishlistProducts;
@@ -73,42 +78,48 @@ class _WishlistScreenState extends State<WishlistScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return ValueListenableBuilder(
-      valueListenable: productsCardNavigation,
-      builder: (context, value, child) {
-        if (value == null) {
-          return const CircularProgressIndicator();
-        } else if (value.productsCard.isEmpty) {
-          return const Center(
-            child: Text(
-              "Lista de desejos vazia.",
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          );
-        }
-
-        return Scaffold(
-          appBar: AppBar(
-            elevation: 0,
-            title: const Text(
-              "Lista de desejos",
-              style: TextStyle(
-                color: Colors.black,
-              ),
-            ),
-            backgroundColor: Colors.white,
-            actions: const [
-              Icon(
-                Icons.search,
-                color: Colors.black,
-              ),
-              SizedBox(width: 6),
-            ],
+    return Scaffold(
+      key: _scaffoldKey,
+      appBar: AppBar(
+        elevation: 0,
+        leading: OpenDrawerButtonWidget(
+          scaffoldKey: _scaffoldKey,
+        ),
+        centerTitle: true,
+        title: const Text(
+          "Lista de desejos",
+          style: TextStyle(
+            color: Colors.black,
+            fontSize: 14,
           ),
-          body: SingleChildScrollView(
+        ),
+        backgroundColor: Colors.white,
+        actions: const [
+          Icon(
+            Icons.search,
+            color: Colors.black,
+          ),
+          SizedBox(width: 6),
+        ],
+      ),
+      body: ValueListenableBuilder(
+        valueListenable: productsCardNavigation,
+        builder: (context, value, child) {
+          if (value == null) {
+            return const CircularProgressIndicator();
+          } else if (value.productsCard.isEmpty) {
+            return const Center(
+              child: Text(
+                "Lista de desejos vazia.",
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            );
+          }
+
+          return SingleChildScrollView(
             child: Align(
               alignment: Alignment.center,
               child: Padding(
@@ -135,9 +146,10 @@ class _WishlistScreenState extends State<WishlistScreen> {
                 ),
               ),
             ),
-          ),
-        );
-      },
+          );
+        },
+      ),
+      drawer: const DrawerWidget(),
     );
   }
 }

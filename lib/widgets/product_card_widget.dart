@@ -35,7 +35,7 @@ class ProductCardWidget extends StatelessWidget {
           top: 10,
         ),
         width: 140,
-        height: 150.5,
+        height: 200,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
