@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-import 'package:power_tech/widgets/product_quantity_picker_widget.dart';
+import 'package:power_tech/screens/cart_screen/components/card_product_widget/price_quantity_selector_widget.dart';
 
 class ProductCardItemWidget extends StatefulWidget {
   const ProductCardItemWidget({super.key});
@@ -11,24 +11,6 @@ class ProductCardItemWidget extends StatefulWidget {
 }
 
 class _ProductCardItemWidgetState extends State<ProductCardItemWidget> {
-  int productQuantity = 0;
-
-  void increaseAmountProduct() {
-    if (productQuantity < 20) {
-      setState(() {
-        productQuantity++;
-      });
-    }
-  }
-
-  void decreaseAmountProduct() {
-    if (productQuantity > 1) {
-      setState(() {
-        productQuantity--;
-      });
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -63,34 +45,18 @@ class _ProductCardItemWidgetState extends State<ProductCardItemWidget> {
               constraints: const BoxConstraints(
                 maxHeight: 100,
               ),
-              child: Column(
+              child: const Column(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
+                  Text(
                     "Processador Intel Core i7-10700K",
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w500,
                     ),
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      const Text(
-                        "R\$ 2.166,66",
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      ProductQuantityPickerWidget(
-                        productQuantity: productQuantity,
-                        increaseAmountProduct: increaseAmountProduct,
-                        decreaseAmountProduct: increaseAmountProduct,
-                      ),
-                    ],
-                  ),
+                  PriceQuantitySelectorWidget(),
                 ],
               ),
             ),
