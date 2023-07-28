@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:power_tech/screens/home_screen/components/section_products/main.dart';
 import 'package:power_tech/screens/main_screen/components/drawer_widget/main.dart';
-
-import 'package:power_tech/widgets/open_drawer_button_widget.dart';
+import 'package:power_tech/widgets/custom_app_bar_widget/main.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -19,27 +18,12 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldKey,
-      appBar: AppBar(
-        elevation: 0,
-        leading: OpenDrawerButtonWidget(
-          scaffoldKey: _scaffoldKey,
-        ),
-        centerTitle: true,
-        title: const Text(
-          "Power Tech",
-          style: TextStyle(
-            color: Colors.black,
-            fontSize: 14,
-          ),
-        ),
-        backgroundColor: Colors.white,
-        actions: const <Widget>[
-          Icon(
-            Icons.notifications,
-            color: Colors.black,
-          ),
-          SizedBox(width: 6),
-        ],
+      appBar: CustomAppBarWidget(
+        title: "Power Tech",
+        actionIcon: Icons.notifications,
+        actionIconTooltip: "Notificações",
+        actionIconFunction: () {},
+        scaffoldKey: _scaffoldKey,
       ),
       drawer: const DrawerWidget(),
       body: const SectionProducts(),

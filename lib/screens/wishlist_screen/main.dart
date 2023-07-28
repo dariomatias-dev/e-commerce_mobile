@@ -10,7 +10,7 @@ import 'package:power_tech/providers/user_preferences_inherited.dart';
 import 'package:power_tech/screens/main_screen/components/drawer_widget/main.dart';
 
 import 'package:power_tech/widgets/app_bar_break_widget.dart';
-import 'package:power_tech/widgets/open_drawer_button_widget.dart';
+import 'package:power_tech/widgets/custom_app_bar_widget/main.dart';
 import 'package:power_tech/widgets/product_card_widget.dart';
 
 import 'package:power_tech/services/api_services.dart';
@@ -81,27 +81,12 @@ class _WishlistScreenState extends State<WishlistScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldKey,
-      appBar: AppBar(
-        elevation: 0,
-        leading: OpenDrawerButtonWidget(
-          scaffoldKey: _scaffoldKey,
-        ),
-        centerTitle: true,
-        title: const Text(
-          "Lista de desejos",
-          style: TextStyle(
-            color: Colors.black,
-            fontSize: 14,
-          ),
-        ),
-        backgroundColor: Colors.white,
-        actions: const [
-          Icon(
-            Icons.search,
-            color: Colors.black,
-          ),
-          SizedBox(width: 6),
-        ],
+      appBar: CustomAppBarWidget(
+        title: "Lista de desejos",
+        actionIcon: Icons.search,
+        actionIconTooltip: "Pesquisar",
+        actionIconFunction: () {},
+        scaffoldKey: _scaffoldKey,
       ),
       body: ValueListenableBuilder(
         valueListenable: productsCardNavigation,
