@@ -9,6 +9,7 @@ import 'package:power_tech/providers/user_preferences_inherited.dart';
 
 import 'package:power_tech/screens/main_screen/components/drawer_widget/main.dart';
 
+import 'package:power_tech/widgets/app_bar_break_widget.dart';
 import 'package:power_tech/widgets/open_drawer_button_widget.dart';
 import 'package:power_tech/widgets/product_card_widget.dart';
 
@@ -119,31 +120,41 @@ class _WishlistScreenState extends State<WishlistScreen> {
             );
           }
 
-          return SingleChildScrollView(
-            child: Align(
-              alignment: Alignment.center,
-              child: Padding(
-                padding: const EdgeInsets.symmetric(
-                  vertical: 16,
-                  horizontal: 10,
-                ),
-                child: LayoutBuilder(
-                  builder: (context, constraints) {
-                    return Wrap(
-                      spacing: 10,
-                      runSpacing: 10,
-                      alignment: WrapAlignment.spaceBetween,
-                      children: List.generate(
-                        value.productsCard.length,
-                        (index) {
-                          return ProductCardWidget(
-                            productCard: value.productsCard[index],
+          return ScrollConfiguration(
+            behavior: ScrollConfiguration.of(context).copyWith(
+              scrollbars: false,
+            ),
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  const AppBarBreakWidget(),
+                  Align(
+                    alignment: Alignment.center,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                        vertical: 16,
+                        horizontal: 10,
+                      ),
+                      child: LayoutBuilder(
+                        builder: (context, constraints) {
+                          return Wrap(
+                            spacing: 10,
+                            runSpacing: 10,
+                            alignment: WrapAlignment.spaceBetween,
+                            children: List.generate(
+                              value.productsCard.length,
+                              (index) {
+                                return ProductCardWidget(
+                                  productCard: value.productsCard[index],
+                                );
+                              },
+                            ),
                           );
                         },
                       ),
-                    );
-                  },
-                ),
+                    ),
+                  ),
+                ],
               ),
             ),
           );
