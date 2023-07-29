@@ -20,6 +20,6 @@ class ProductScreenInfoInherited extends InheritedWidget {
 
   @override
   bool updateShouldNotify(ProductScreenInfoInherited oldWidget) {
-    return true;
+    return oldWidget.thereAreSimilarProducts != thereAreSimilarProducts;
   }
 }

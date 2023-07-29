@@ -15,7 +15,6 @@ class CartProductCardWidgetState extends State<CartProductCardWidget> {
     setState(() {
       deleteProduct = true;
     });
-    print("Produto deletado!");
   }
 
   @override

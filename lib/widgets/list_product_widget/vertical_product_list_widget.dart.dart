@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:power_tech/models/product_card_model.dart';
 
+import 'package:power_tech/widgets/app_bar_break_widget.dart';
 import 'package:power_tech/widgets/product_card_widget.dart';
 
 class VerticalProductListWidget extends StatefulWidget {
@@ -35,6 +36,7 @@ class _VerticalProductListWidgetState extends State<VerticalProductListWidget> {
         final ScrollPosition scrollPosition = scrollControler.position;
         final bool reachedScrollEnd =
             scrollPosition.pixels == scrollPosition.maxScrollExtent;
+
         if (reachedScrollEnd && widget.conditionToSkip) {
           widget.fetchData();
         }
@@ -52,26 +54,46 @@ class _VerticalProductListWidgetState extends State<VerticalProductListWidget> {
   Widget build(BuildContext context) {
     final productsCard = widget.productsCard;
 
-    return SizedBox(
-      height: 220,
-      child: ListView.builder(
-        padding: const EdgeInsets.only(
-          bottom: 4,
-        ),
+    return ScrollConfiguration(
+      behavior: ScrollConfiguration.of(context).copyWith(
+        scrollbars: false,
+      ),
+      child: SingleChildScrollView(
         controller: widget.scrollController,
-        scrollDirection: Axis.horizontal,
-        itemCount: productsCard.length * 2 + 1,
-        itemBuilder: (context, index) {
-          if (index == 0 || index == productsCard.length + 1) {
-            return const SizedBox(width: 6);
-          } else if (index % 2 == 0) {
-            return const SizedBox(width: 10);
-          }
+        child: Column(
+          children: [
+            const AppBarBreakWidget(),
+            Align(
+              alignment: Alignment.center,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                  vertical: 16,
+                  horizontal: 10,
+                ),
+                child: LayoutBuilder(
+                  builder: (context, constraints) {
+                    return Wrap(
+                      spacing: 10,
+                      runSpacing: 10,
+                      alignment: WrapAlignment.spaceBetween,
+                      children: List.generate(
+                        productsCard.length,
+                        (index) {
+                          final ProductCardModel productCard =
+                              productsCard[index];
 
-          return ProductCardWidget(
-            productCard: productsCard[(index / 2).floor()],
-          );
-        },
+                          return ProductCardWidget(
+                            productCard: productCard,
+                          );
+                        },
+                      ),
+                    );
+                  },
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

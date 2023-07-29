@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:power_tech/widgets/vertical_list_products_widget/main.dart';
+import 'package:power_tech/widgets/list_product_widget/main.dart';
 
 class SimilarProductsWidget extends StatefulWidget {
   const SimilarProductsWidget({
@@ -20,7 +20,6 @@ class _SimilarProductsWidgetState extends State<SimilarProductsWidget> {
   @override
   Widget build(BuildContext context) {
     const String routeName = "products-by-category-ids";
-
     return Container(
       padding: const EdgeInsets.symmetric(
         vertical: 16,
@@ -44,10 +43,12 @@ class _SimilarProductsWidgetState extends State<SimilarProductsWidget> {
             ),
           ),
           const SizedBox(height: 4),
-          VerticalListProductsWidget(
+          ListProductWidget(
             routeName: routeName,
             productId: widget.productId,
-            categoryIds: widget.categoryIds.join(","),
+            categoryIds: widget.categoryIds,
+            listType: "similar_products",
+            listDirection: "horizontal",
           ),
         ],
       ),
