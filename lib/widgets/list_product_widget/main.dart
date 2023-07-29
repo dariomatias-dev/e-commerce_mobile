@@ -6,8 +6,8 @@ import 'package:power_tech/models/products_card_navigation_model.dart';
 import 'package:power_tech/models/product_card_model.dart';
 
 import 'package:power_tech/providers/product_screen_context_inherited.dart';
-import 'package:power_tech/providers/user_preferences_inherited.dart';
 
+import 'package:power_tech/widgets/feedback_widget.dart';
 import 'package:power_tech/widgets/list_product_widget/horizontal_product_list_widget.dart';
 import 'package:power_tech/widgets/list_product_widget/vertical_product_list_widget.dart.dart';
 
@@ -18,6 +18,7 @@ class ListProductWidget extends StatefulWidget {
     super.key,
     required this.routeName,
     this.productId,
+    this.wishlistProductIds,
     this.categoryIds,
     required this.listType,
     required this.listDirection,
@@ -25,6 +26,7 @@ class ListProductWidget extends StatefulWidget {
 
   final String routeName;
   final String? productId;
+  final List<String>? wishlistProductIds;
   final List<String>? categoryIds;
   final String listType;
   final String listDirection;
@@ -130,11 +132,8 @@ class _ListProductWidgetState extends State<ListProductWidget> {
         "${widget.routeName}${fetchQuantity ? "/amount" : ""}";
 
     if (widget.listType == "wishlist") {
-      final List<String>? productIds =
-          UserPreferencesInherited.of(context)?.wishlistProductIds;
-
       url =
-          "$commonPartUrl?${skip != null ? "skip=$skip&" : ""}productIds=${productIds!.join(",")}";
+          "$commonPartUrl?${skip != null ? "skip=$skip&" : ""}productIds=${widget.wishlistProductIds!.join(",")}";
     } else {
       url =
           "$commonPartUrl$categoryIdsParam${skip != null ? "skip=$skip" : ""}";
@@ -160,14 +159,8 @@ class _ListProductWidgetState extends State<ListProductWidget> {
         if (value == null) {
           return const CircularProgressIndicator();
         } else if (value.productsCard.isEmpty) {
-          return const Center(
-            child: Text(
-              "Não há produtos.",
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
+          return const FeedbackWidget(
+            message: "Não há produtos.",
           );
         }
 

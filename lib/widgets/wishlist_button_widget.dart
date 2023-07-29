@@ -41,7 +41,7 @@ class WishlistButtonWidget extends StatelessWidget {
     final List<String> productIds =
         UserPreferencesInherited.of(context)?.wishlistProductIds ?? [];
 
-    return InkWell(
+    return GestureDetector(
       onTap: () => updateUserPreferences(
         productId,
         context,

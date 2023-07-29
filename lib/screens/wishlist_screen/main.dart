@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 
+import 'package:power_tech/providers/user_preferences_inherited.dart';
+
 import 'package:power_tech/screens/main_screen/components/drawer_widget/main.dart';
 
 import 'package:power_tech/widgets/custom_app_bar_widget/main.dart';
+import 'package:power_tech/widgets/feedback_widget.dart';
 import 'package:power_tech/widgets/list_product_widget/main.dart';
 
 class WishlistScreen extends StatefulWidget {
@@ -26,10 +29,34 @@ class _WishlistScreenState extends State<WishlistScreen> {
         actionIconFunction: () {},
         scaffoldKey: _scaffoldKey,
       ),
-      body: const ListProductWidget(
-        routeName: "products-by-ids",
-        listType: "wishlist",
-        listDirection: "vertical",
+      body: FutureBuilder(
+        future: Future.value(
+          UserPreferencesInherited.of(context)?.wishlistProductIds,
+        ),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const CircularProgressIndicator();
+          } else if (snapshot.hasError) {
+            return const FeedbackWidget(
+              message: "Ocorreu um problema",
+            );
+          }
+
+          List<String>? wishlistProductIds = snapshot.data;
+
+          if (wishlistProductIds != null && wishlistProductIds.isEmpty) {
+            return const FeedbackWidget(
+              message: "Ainda não há nenhuma produto.",
+            );
+          }
+
+          return ListProductWidget(
+            routeName: "products-by-ids",
+            wishlistProductIds: wishlistProductIds,
+            listType: "wishlist",
+            listDirection: "vertical",
+          );
+        },
       ),
       drawer: const DrawerWidget(),
     );
