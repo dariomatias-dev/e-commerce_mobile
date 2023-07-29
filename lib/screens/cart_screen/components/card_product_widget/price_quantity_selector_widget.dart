@@ -4,7 +4,12 @@ import 'package:power_tech/utils/format_to_real.dart';
 import 'package:power_tech/widgets/product_quantity_picker_widget.dart';
 
 class PriceQuantitySelectorWidget extends StatefulWidget {
-  const PriceQuantitySelectorWidget({super.key});
+  const PriceQuantitySelectorWidget({
+    super.key,
+    required this.price,
+  });
+
+  final String price;
 
   @override
   State<PriceQuantitySelectorWidget> createState() =>
@@ -33,7 +38,7 @@ class _PriceQuantitySelectorWidgetState
 
   @override
   Widget build(BuildContext context) {
-    const double productPrice = 2166.66;
+    final double productPrice = double.parse(widget.price);
     final price = productPrice * productQuantity;
     final String formattedPrice = formatToReal(price);
 

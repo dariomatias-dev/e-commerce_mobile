@@ -46,7 +46,7 @@ class _WishlistScreenState extends State<WishlistScreen> {
 
           if (wishlistProductIds != null && wishlistProductIds.isEmpty) {
             return const FeedbackWidget(
-              message: "Ainda não há nenhuma produto.",
+              message: "Ainda não há produtos na lista de desejos.",
             );
           }
 

@@ -1,8 +1,16 @@
 import 'package:flutter/material.dart';
+
+import 'package:power_tech/models/product_card_model.dart';
+
 import 'package:power_tech/screens/cart_screen/components/card_product_widget/custom_slidable_widget.dart';
 
 class CartProductCardWidget extends StatefulWidget {
-  const CartProductCardWidget({super.key});
+  const CartProductCardWidget({
+    super.key,
+    required this.productCard,
+  });
+
+  final ProductCardModel productCard;
 
   @override
   State<CartProductCardWidget> createState() => CartProductCardWidgetState();
@@ -33,6 +41,7 @@ class CartProductCardWidgetState extends State<CartProductCardWidget> {
       child: deleteProduct
           ? const SizedBox()
           : CustomSlidableWidget(
+              productCard: widget.productCard,
               updateDeleteProduct: _updateDeleteProduct,
             ),
     );

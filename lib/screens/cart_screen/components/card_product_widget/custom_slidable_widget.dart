@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
-
 import 'package:flutter_slidable/flutter_slidable.dart';
+
+import 'package:power_tech/models/product_card_model.dart';
 
 import 'package:power_tech/screens/cart_screen/components/card_product_widget/product_card_item_widget.dart';
 
 class CustomSlidableWidget extends StatelessWidget {
   const CustomSlidableWidget({
     super.key,
+    required this.productCard,
     required this.updateDeleteProduct,
   });
 
+  final ProductCardModel productCard;
   final VoidCallback updateDeleteProduct;
 
   @override
@@ -38,7 +41,9 @@ class CustomSlidableWidget extends StatelessWidget {
           ),
         ],
       ),
-      child: const ProductCardItemWidget(),
+      child: ProductCardItemWidget(
+        productCard: productCard,
+      ),
     );
   }
 }
