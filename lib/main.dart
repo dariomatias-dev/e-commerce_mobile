@@ -27,13 +27,6 @@ class _MyAppState extends State<MyApp> {
   List<String>? wishlistProductIds;
   List<String>? cartProductIds;
 
-  @override
-  void initState() {
-    super.initState();
-    fetchWishlistProductIds();
-    fetchCartProductIds();
-  }
-
   Future<void> fetchWishlistProductIds() async {
     try {
       var response = await apiServices.get(
@@ -57,7 +50,6 @@ class _MyAppState extends State<MyApp> {
       var response = await apiServices.get(
         "cart/57e99e52-753e-4da7-8a67-a6286edd2ee4",
       );
-
       setState(() {
         cartProductIds = (jsonDecode(response) as List<dynamic>).cast<String>();
       });
@@ -79,6 +71,13 @@ class _MyAppState extends State<MyApp> {
     setState(() {
       cartProductIds = newCartProductIds;
     });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    fetchWishlistProductIds();
+    fetchCartProductIds();
   }
 
   @override

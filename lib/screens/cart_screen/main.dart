@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:power_tech/models/price_and_quantity_model.dart';
+import 'dart:developer' as developer;
 import 'dart:convert';
 
+import 'package:power_tech/models/price_and_quantity_model.dart';
 import 'package:power_tech/models/product_card_model.dart';
-import 'package:power_tech/providers/cart_screen_inherited.dart';
 
+import 'package:power_tech/providers/cart_screen_inherited.dart';
 import 'package:power_tech/providers/user_preferences_inherited.dart';
 
 import 'package:power_tech/screens/cart_screen/components/card_product_widget/main.dart';
+import 'package:power_tech/screens/cart_screen/components/section_price_options_widget.dart';
 import 'package:power_tech/screens/main_screen/components/drawer_widget/main.dart';
 
 import 'package:power_tech/widgets/app_bar_break_widget.dart';
@@ -29,10 +31,11 @@ class _CartScreenState extends State<CartScreen> {
   ValueNotifier<List<ProductCardModel>?> productCards =
       ValueNotifier<List<ProductCardModel>?>(null);
 
+  List<String>? previousCartProductIds;
   Map<String, PriceAndQuantityModel> pricesAndQuantitiesMap = {};
-  String totalPrice = "";
+  late double totalOrderPrice;
 
-  Future<void> fecthData() async {
+  Future<void> fetchData() async {
     final List<String>? cartProductIds =
         UserPreferencesInherited.of(context)?.cartProductIds;
 
@@ -49,6 +52,8 @@ class _CartScreenState extends State<CartScreen> {
             productCardData as Map<String, dynamic>);
       }).toList();
 
+      setPricesAndQuantitiesMap(data);
+
       setState(() {
         productCards.value = data;
       });
@@ -57,6 +62,26 @@ class _CartScreenState extends State<CartScreen> {
     }
   }
 
+  // It will create a field in the object with the id of the product, inserting its price and quantity
+  void setPricesAndQuantitiesMap(List<ProductCardModel> productCards) {
+    addPriceAndQuantityMap(productCards);
+    removePricesAndQuantitiesMap();
+
+    setTotalOrderPrice();
+  }
+
+  void addPriceAndQuantityMap(List<ProductCardModel> productCards) {
+    for (ProductCardModel productCard in productCards) {
+      if (!pricesAndQuantitiesMap.containsKey(productCard.id)) {
+        pricesAndQuantitiesMap[productCard.id] = PriceAndQuantityModel(
+          price: productCard.price,
+          quantity: 1,
+        );
+      }
+    }
+  }
+
+  // If the quantity is one, the product is withdrawn, otherwise it is added or updated.
   void updatePricesAndQuantitiesMap(
     String productId,
     double price,
@@ -71,22 +96,67 @@ class _CartScreenState extends State<CartScreen> {
       quantity: quantity,
     );
 
-    setTotalPrice();
+    setTotalOrderPrice();
   }
 
-  void setTotalPrice() {
-    double totalOrderPrice = 0;
+  void removePricesAndQuantitiesMap() {
+    final List<String> cartProductIds =
+        UserPreferencesInherited.of(context)!.cartProductIds;
+    final List<String> mapKeys = pricesAndQuantitiesMap.keys.toList();
+
+    for (String key in mapKeys) {
+      if (!cartProductIds.contains(key)) {
+        pricesAndQuantitiesMap.remove(key);
+      }
+    }
+  }
+
+  void removePriceAndQuantityMap(String productId) {
+    pricesAndQuantitiesMap.remove(productId);
+
+    setTotalOrderPrice();
+  }
+
+  // The calculation is made to define the total price of the products in the cart
+  void setTotalOrderPrice() {
+    double newTotalOrderPrice = 0;
     pricesAndQuantitiesMap.forEach((key, priceAndQuantityMap) {
-      totalOrderPrice +=
+      newTotalOrderPrice +=
           priceAndQuantityMap.price * priceAndQuantityMap.quantity;
     });
-    totalOrderPrice;
+
+    setState(() {
+      totalOrderPrice = newTotalOrderPrice;
+    });
+  }
+
+  Future<void> removeAllProducts() async {
+    final UserPreferencesInherited userPreferencesInherited =
+        UserPreferencesInherited.of(context)!;
+
+    userPreferencesInherited.updateCartProductIds([]);
+
+    final Map<String, dynamic> body = {
+      "productIds": [],
+    };
+
+    try {
+      await apiServices.put(
+        "cart/57e99e52-753e-4da7-8a67-a6286edd2ee4",
+        body,
+      );
+    } catch (err) {
+      developer.log(
+        "An excess occurred: $err",
+        error: err,
+      );
+    }
   }
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    fecthData();
+    fetchData();
   }
 
   @override
@@ -97,7 +167,7 @@ class _CartScreenState extends State<CartScreen> {
         title: "Carrinho",
         actionIcon: Icons.remove_circle_outline,
         actionIconTooltip: "Remover tudo",
-        actionIconFunction: () {},
+        actionIconFunction: removeAllProducts,
         scaffoldKey: _scaffoldKey,
       ),
       body: ValueListenableBuilder(
@@ -111,38 +181,25 @@ class _CartScreenState extends State<CartScreen> {
             );
           }
 
-          for (ProductCardModel productCard in value) {
-            if (!pricesAndQuantitiesMap.containsKey(productCard.id)) {
-              pricesAndQuantitiesMap[productCard.id] = PriceAndQuantityModel(
-                price: productCard.price,
-                quantity: 1,
-              );
-            }
-          }
-          setTotalPrice();
-
-          return Column(
-            children: [
-              const AppBarBreakWidget(),
-              Expanded(
-                child: CartScreenInherited(
-                  totalPrice: totalPrice,
-                  pricesAndQuantitiesMap: pricesAndQuantitiesMap,
-                  updatePricesAndQuantitiesMap: updatePricesAndQuantitiesMap,
-                  child: ListView.builder(
-                    itemCount: value.length,
-                    itemBuilder: (context, index) {
-                      final ProductCardModel productCard = value[index];
-
-                      return CartProductCardWidget(
-                        key: ValueKey(productCard.id),
-                        productCard: productCard,
-                      );
-                    },
-                  ),
-                ),
+          return CartScreenInherited(
+            totalOrderPrice: totalOrderPrice,
+            pricesAndQuantitiesMap: pricesAndQuantitiesMap,
+            updatePricesAndQuantitiesMap: updatePricesAndQuantitiesMap,
+            removePriceAndQuantityMap: removePriceAndQuantityMap,
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  const AppBarBreakWidget(),
+                  ...value.map((productCard) {
+                    return CartProductCardWidget(
+                      key: ValueKey(productCard.id),
+                      productCard: productCard,
+                    );
+                  }).toList(),
+                  const SectionPriceOptionsWidget(),
+                ],
               ),
-            ],
+            ),
           );
         },
       ),

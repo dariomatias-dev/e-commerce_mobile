@@ -5,15 +5,17 @@ import 'package:power_tech/models/price_and_quantity_model.dart';
 class CartScreenInherited extends InheritedWidget {
   const CartScreenInherited({
     super.key,
-    required this.totalPrice,
+    required this.totalOrderPrice,
     required this.pricesAndQuantitiesMap,
     required this.updatePricesAndQuantitiesMap,
+    required this.removePriceAndQuantityMap,
     required Widget child,
   }) : super(child: child);
 
-  final String totalPrice;
+  final double totalOrderPrice;
   final Map<String, PriceAndQuantityModel> pricesAndQuantitiesMap;
   final Function(String, double, int) updatePricesAndQuantitiesMap;
+  final Function(String) removePriceAndQuantityMap;
 
   static CartScreenInherited? of(BuildContext context) {
     return context.dependOnInheritedWidgetOfExactType<CartScreenInherited>();
@@ -21,6 +23,6 @@ class CartScreenInherited extends InheritedWidget {
 
   @override
   bool updateShouldNotify(CartScreenInherited oldWidget) {
-    return oldWidget.totalPrice != totalPrice || oldWidget.pricesAndQuantitiesMap != pricesAndQuantitiesMap;
+    return oldWidget.totalOrderPrice != totalOrderPrice || oldWidget.pricesAndQuantitiesMap != pricesAndQuantitiesMap;
   }
 }

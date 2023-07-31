@@ -12,13 +12,13 @@ class UserPreferencesManager {
     required this.listType,
     required this.productId,
     required this.context,
-    required this.screenContext,
+    this.screenContext,
   });
 
   final String listType;
   final String productId;
   final BuildContext context;
-  final BuildContext screenContext;
+  final BuildContext? screenContext;
 
   void update() {
     final UserPreferencesInherited userPreferencesInherited =
@@ -63,7 +63,9 @@ class UserPreferencesManager {
         body,
       );
 
-      sendSuccessMessage(actionType);
+      if (screenContext != null) {
+        sendSuccessMessage(actionType);
+      }
     } catch (err) {
       developer.log(
         "An excess occurred: $err",
@@ -74,7 +76,7 @@ class UserPreferencesManager {
 
   void sendSuccessMessage(String actionType) {
     showTopMessageBar(
-      screenContext,
+      screenContext!,
       listType,
       actionType,
     );

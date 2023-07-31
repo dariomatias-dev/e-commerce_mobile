@@ -39,7 +39,7 @@ class _PriceQuantitySelectorWidgetState
     });
   }
 
-  void _updateProductQuantity() {
+  void _setProductQuantity() {
     final Map<String, PriceAndQuantityModel> pricesAndQuantitiesMap =
         CartScreenInherited.of(context)!.pricesAndQuantitiesMap;
     productQuantity =
@@ -51,7 +51,7 @@ class _PriceQuantitySelectorWidgetState
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    _updateProductQuantity();
+    _setProductQuantity();
   }
 
   @override
@@ -59,7 +59,7 @@ class _PriceQuantitySelectorWidgetState
     super.didUpdateWidget(oldWidget);
     if (CartScreenInherited.of(context)!.pricesAndQuantitiesMap !=
         previousPricesAndQuantitiesMap) {
-      _updateProductQuantity();
+      _setProductQuantity();
     }
   }
 
