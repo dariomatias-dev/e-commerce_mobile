@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:power_tech/models/price_and_quantity_model.dart';
 
 import 'package:power_tech/models/product_card_model.dart';
 
@@ -23,7 +24,8 @@ class PriceQuantitySelectorWidget extends StatefulWidget {
 
 class _PriceQuantitySelectorWidgetState
     extends State<PriceQuantitySelectorWidget> {
-  int productQuantity = 1;
+  late int productQuantity;
+  Map<String, PriceAndQuantityModel>? previousPricesAndQuantitiesMap;
 
   void updateProductPrice(int newQuantity) {
     CartScreenInherited.of(context)?.updatePricesAndQuantitiesMap(
@@ -35,6 +37,30 @@ class _PriceQuantitySelectorWidgetState
     setState(() {
       productQuantity = newQuantity;
     });
+  }
+
+  void _updateProductQuantity() {
+    final Map<String, PriceAndQuantityModel> pricesAndQuantitiesMap =
+        CartScreenInherited.of(context)!.pricesAndQuantitiesMap;
+    productQuantity =
+        pricesAndQuantitiesMap[widget.productCard.id]?.quantity ?? 1;
+
+    previousPricesAndQuantitiesMap = pricesAndQuantitiesMap;
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _updateProductQuantity();
+  }
+
+  @override
+  void didUpdateWidget(PriceQuantitySelectorWidget oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (CartScreenInherited.of(context)!.pricesAndQuantitiesMap !=
+        previousPricesAndQuantitiesMap) {
+      _updateProductQuantity();
+    }
   }
 
   @override

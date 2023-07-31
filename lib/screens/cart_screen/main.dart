@@ -62,6 +62,10 @@ class _CartScreenState extends State<CartScreen> {
     double price,
     int quantity,
   ) {
+    if (quantity == 1) {
+      pricesAndQuantitiesMap.remove(productId);
+    }
+
     pricesAndQuantitiesMap[productId] = PriceAndQuantityModel(
       price: price,
       quantity: quantity,
@@ -76,8 +80,7 @@ class _CartScreenState extends State<CartScreen> {
       totalOrderPrice +=
           priceAndQuantityMap.price * priceAndQuantityMap.quantity;
     });
-
-    print(totalOrderPrice);
+    totalOrderPrice;
   }
 
   @override
@@ -108,12 +111,13 @@ class _CartScreenState extends State<CartScreen> {
             );
           }
 
-          pricesAndQuantitiesMap = {};
           for (ProductCardModel productCard in value) {
-            pricesAndQuantitiesMap[productCard.id] = PriceAndQuantityModel(
-              price: productCard.price,
-              quantity: 1,
-            );
+            if (!pricesAndQuantitiesMap.containsKey(productCard.id)) {
+              pricesAndQuantitiesMap[productCard.id] = PriceAndQuantityModel(
+                price: productCard.price,
+                quantity: 1,
+              );
+            }
           }
           setTotalPrice();
 
@@ -123,6 +127,7 @@ class _CartScreenState extends State<CartScreen> {
               Expanded(
                 child: CartScreenInherited(
                   totalPrice: totalPrice,
+                  pricesAndQuantitiesMap: pricesAndQuantitiesMap,
                   updatePricesAndQuantitiesMap: updatePricesAndQuantitiesMap,
                   child: ListView.builder(
                     itemCount: value.length,
@@ -130,6 +135,7 @@ class _CartScreenState extends State<CartScreen> {
                       final ProductCardModel productCard = value[index];
 
                       return CartProductCardWidget(
+                        key: ValueKey(productCard.id),
                         productCard: productCard,
                       );
                     },
