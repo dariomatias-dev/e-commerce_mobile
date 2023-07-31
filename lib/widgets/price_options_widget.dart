@@ -6,11 +6,9 @@ class PriceOptionsWidget extends StatefulWidget {
   const PriceOptionsWidget({
     super.key,
     required this.price,
-    required this.productQuantity,
   });
 
-  final String price;
-  final int productQuantity;
+  final double price;
 
   @override
   State<PriceOptionsWidget> createState() => _PriceOptionsWidgetState();
@@ -19,7 +17,7 @@ class PriceOptionsWidget extends StatefulWidget {
 class _PriceOptionsWidgetState extends State<PriceOptionsWidget> {
   @override
   Widget build(BuildContext context) {
-    final double price = double.parse(widget.price) * widget.productQuantity;
+    final double price = widget.price;
     final String formattedPrice = formatToReal(price);
 
     final String valueInInstallments = (price / 12).toStringAsFixed(2);

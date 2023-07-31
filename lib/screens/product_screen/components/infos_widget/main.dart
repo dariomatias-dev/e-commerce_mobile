@@ -17,7 +17,7 @@ class InfosWidget extends StatelessWidget {
 
   final String productId;
   final String name;
-  final String price;
+  final double price;
   final String description;
   final List<String> categoryIds;
 

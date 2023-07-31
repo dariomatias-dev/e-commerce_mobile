@@ -1,11 +1,4 @@
 class ProductModel {
-  final String id;
-  final String name;
-  final String price;
-  final String description;
-  final int amountOfImages;
-  final List<String> categoryIds;
-
   ProductModel({
     required this.id,
     required this.name,
@@ -15,11 +8,18 @@ class ProductModel {
     required this.categoryIds,
   });
 
+  final String id;
+  final String name;
+  final double price;
+  final String description;
+  final int amountOfImages;
+  final List<String> categoryIds;
+
   factory ProductModel.fromMap(Map<String, dynamic> map) {
     return ProductModel(
       id: map["id"] ?? "",
       name: map["name"] ?? "",
-      price: map["price"] ?? "",
+      price: double.parse(map["price"]),
       description: map["description"] ?? "",
       amountOfImages: map["amountOfImages"] ?? 0,
       categoryIds: (map["categoryIds"] as List<dynamic>).cast<String>(),

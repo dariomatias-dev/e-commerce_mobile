@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:power_tech/widgets/divider_widget.dart';
-import 'package:power_tech/screens/product_screen/components/infos_widget/payment_calculator_widget.dart';
+import 'package:power_tech/widgets/price_options_widget.dart';
 import 'package:power_tech/widgets/product_quantity_picker_widget.dart';
 
 class ProductDetailsWidget extends StatefulWidget {
@@ -14,7 +14,7 @@ class ProductDetailsWidget extends StatefulWidget {
 
   final String name;
   final String description;
-  final String price;
+  final double price;
 
   @override
   State<ProductDetailsWidget> createState() => _ProductDetailsWidgetState();
@@ -31,6 +31,8 @@ class _ProductDetailsWidgetState extends State<ProductDetailsWidget> {
 
   @override
   Widget build(BuildContext context) {
+    final double totalPrice = widget.price * productQuantity;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -75,8 +77,7 @@ class _ProductDetailsWidgetState extends State<ProductDetailsWidget> {
         ),
         const DividerWidget(),
         PriceOptionsWidget(
-          price: widget.price,
-          productQuantity: productQuantity,
+          price: totalPrice,
         ),
       ],
     );

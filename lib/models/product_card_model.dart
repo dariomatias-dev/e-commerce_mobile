@@ -1,13 +1,13 @@
 class ProductCardModel {
-  final String id;
-  final String name;
-  final double price;
-
   ProductCardModel({
     required this.id,
     required this.name,
     required this.price,
   });
+
+  final String id;
+  final String name;
+  final double price;
 
   factory ProductCardModel.fromMap(Map<String, dynamic> map) {
     return ProductCardModel(
