@@ -4,13 +4,11 @@ class ProductQuantityPickerWidget extends StatefulWidget {
   const ProductQuantityPickerWidget({
     super.key,
     required this.productQuantity,
-    required this.increaseAmountProduct,
-    required this.decreaseAmountProduct,
+    required this.updateProductPrice,
   });
 
   final int productQuantity;
-  final VoidCallback increaseAmountProduct;
-  final VoidCallback decreaseAmountProduct;
+  final void Function(int) updateProductPrice;
 
   @override
   State<ProductQuantityPickerWidget> createState() =>
@@ -19,6 +17,22 @@ class ProductQuantityPickerWidget extends StatefulWidget {
 
 class _ProductQuantityPickerWidgetState
     extends State<ProductQuantityPickerWidget> {
+  void increaseAmountProduct() {
+    int productQuantity = widget.productQuantity;
+    if (productQuantity < 20) {
+      final int newQuantity = productQuantity + 1;
+      widget.updateProductPrice(newQuantity);
+    }
+  }
+
+  void decreaseAmountProduct() {
+    int productQuantity = widget.productQuantity;
+    if (productQuantity > 1) {
+      final int newQuantity = productQuantity - 1;
+      widget.updateProductPrice(newQuantity);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -26,11 +40,12 @@ class _ProductQuantityPickerWidgetState
         ButtonWidget(
           actionName: "Remover",
           icon: Icons.remove,
-          function: widget.decreaseAmountProduct,
+          productQuantity: widget.productQuantity,
+          function: decreaseAmountProduct,
         ),
         const SizedBox(width: 8),
         Text(
-          "${widget.productQuantity}",
+          widget.productQuantity.toString(),
           style: const TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.w500,
@@ -40,7 +55,8 @@ class _ProductQuantityPickerWidgetState
         ButtonWidget(
           actionName: "Adicionar",
           icon: Icons.add,
-          function: widget.increaseAmountProduct,
+          productQuantity: widget.productQuantity,
+          function: increaseAmountProduct,
         ),
       ],
     );
@@ -52,11 +68,13 @@ class ButtonWidget extends StatelessWidget {
     super.key,
     required this.actionName,
     required this.icon,
+    required this.productQuantity,
     required this.function,
   });
 
   final String actionName;
   final IconData icon;
+  final int productQuantity;
   final VoidCallback function;
 
   @override
@@ -66,7 +84,7 @@ class ButtonWidget extends StatelessWidget {
       child: MouseRegion(
         cursor: SystemMouseCursors.click,
         child: NeumorphicButton(
-          onPressed: () => function(),
+          onPressed: function,
           padding: const EdgeInsets.all(3),
           style: NeumorphicStyle(
             color: Colors.grey.shade50,

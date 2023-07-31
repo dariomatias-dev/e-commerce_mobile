@@ -1,7 +1,7 @@
 class ProductCardModel {
   final String id;
   final String name;
-  final String price;
+  final double price;
 
   ProductCardModel({
     required this.id,
@@ -13,7 +13,7 @@ class ProductCardModel {
     return ProductCardModel(
       id: map["id"] ?? "",
       name: map["name"] ?? "",
-      price: map["price"] ?? "",
+      price: double.parse(map["price"]),
     );
   }
 }

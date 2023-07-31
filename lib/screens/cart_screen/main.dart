@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:power_tech/models/price_and_quantity_model.dart';
 import 'dart:convert';
 
 import 'package:power_tech/models/product_card_model.dart';
+import 'package:power_tech/providers/cart_screen_inherited.dart';
 
 import 'package:power_tech/providers/user_preferences_inherited.dart';
 
@@ -27,11 +29,8 @@ class _CartScreenState extends State<CartScreen> {
   ValueNotifier<List<ProductCardModel>?> productCards =
       ValueNotifier<List<ProductCardModel>?>(null);
 
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    fecthData();
-  }
+  Map<String, PriceAndQuantityModel> pricesAndQuantitiesMap = {};
+  String totalPrice = "";
 
   Future<void> fecthData() async {
     final List<String>? cartProductIds =
@@ -58,6 +57,35 @@ class _CartScreenState extends State<CartScreen> {
     }
   }
 
+  void updatePricesAndQuantitiesMap(
+    String productId,
+    double price,
+    int quantity,
+  ) {
+    pricesAndQuantitiesMap[productId] = PriceAndQuantityModel(
+      price: price,
+      quantity: quantity,
+    );
+
+    setTotalPrice();
+  }
+
+  void setTotalPrice() {
+    double totalOrderPrice = 0;
+    pricesAndQuantitiesMap.forEach((key, priceAndQuantityMap) {
+      totalOrderPrice +=
+          priceAndQuantityMap.price * priceAndQuantityMap.quantity;
+    });
+
+    print(totalOrderPrice);
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    fecthData();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -80,17 +108,32 @@ class _CartScreenState extends State<CartScreen> {
             );
           }
 
+          pricesAndQuantitiesMap = {};
+          for (ProductCardModel productCard in value) {
+            pricesAndQuantitiesMap[productCard.id] = PriceAndQuantityModel(
+              price: productCard.price,
+              quantity: 1,
+            );
+          }
+          setTotalPrice();
+
           return Column(
             children: [
               const AppBarBreakWidget(),
               Expanded(
-                child: ListView.builder(
-                  itemCount: value.length,
-                  itemBuilder: (context, index) {
-                    return CartProductCardWidget(
-                      productCard: value[index],
-                    );
-                  },
+                child: CartScreenInherited(
+                  totalPrice: totalPrice,
+                  updatePricesAndQuantitiesMap: updatePricesAndQuantitiesMap,
+                  child: ListView.builder(
+                    itemCount: value.length,
+                    itemBuilder: (context, index) {
+                      final ProductCardModel productCard = value[index];
+
+                      return CartProductCardWidget(
+                        productCard: productCard,
+                      );
+                    },
+                  ),
                 ),
               ),
             ],

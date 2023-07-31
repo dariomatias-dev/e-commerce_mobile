@@ -20,7 +20,7 @@ class ProductCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final double price = double.parse(productCard.price);
+    final double price = productCard.price;
     final String formattedPrice = formatToReal(price);
     final String productName = productCard.name;
     final String formattedProductName = formatString(productName);

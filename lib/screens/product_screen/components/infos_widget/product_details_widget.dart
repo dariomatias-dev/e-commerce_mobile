@@ -23,20 +23,10 @@ class ProductDetailsWidget extends StatefulWidget {
 class _ProductDetailsWidgetState extends State<ProductDetailsWidget> {
   int productQuantity = 1;
 
-  void increaseAmountProduct() {
-    if (productQuantity < 20) {
-      setState(() {
-        productQuantity++;
-      });
-    }
-  }
-
-  void decreaseAmountProduct() {
-    if (productQuantity > 1) {
-      setState(() {
-        productQuantity--;
-      });
-    }
+  void updateProductPrice(int newQuantity) {
+    setState(() {
+      productQuantity = newQuantity;
+    });
   }
 
   @override
@@ -68,8 +58,7 @@ class _ProductDetailsWidgetState extends State<ProductDetailsWidget> {
                   ),
                   ProductQuantityPickerWidget(
                     productQuantity: productQuantity,
-                    increaseAmountProduct: increaseAmountProduct,
-                    decreaseAmountProduct: decreaseAmountProduct,
+                    updateProductPrice: updateProductPrice,
                   ),
                 ],
               ),

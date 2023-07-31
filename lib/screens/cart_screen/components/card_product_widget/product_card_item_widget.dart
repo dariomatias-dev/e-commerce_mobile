@@ -67,7 +67,7 @@ class _ProductCardItemWidgetState extends State<ProductCardItemWidget> {
                     ),
                   ),
                   PriceQuantitySelectorWidget(
-                    price: widget.productCard.price,
+                    productCard: widget.productCard,
                   ),
                 ],
               ),

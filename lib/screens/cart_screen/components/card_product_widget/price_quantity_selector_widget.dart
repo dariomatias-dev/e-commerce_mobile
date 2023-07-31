@@ -1,15 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:power_tech/utils/format_to_real.dart';
+
+import 'package:power_tech/models/product_card_model.dart';
+
+import 'package:power_tech/providers/cart_screen_inherited.dart';
 
 import 'package:power_tech/widgets/product_quantity_picker_widget.dart';
+
+import 'package:power_tech/utils/format_to_real.dart';
 
 class PriceQuantitySelectorWidget extends StatefulWidget {
   const PriceQuantitySelectorWidget({
     super.key,
-    required this.price,
+    required this.productCard,
   });
 
-  final String price;
+  final ProductCardModel productCard;
 
   @override
   State<PriceQuantitySelectorWidget> createState() =>
@@ -20,27 +25,22 @@ class _PriceQuantitySelectorWidgetState
     extends State<PriceQuantitySelectorWidget> {
   int productQuantity = 1;
 
-  void increaseAmountProduct() {
-    if (productQuantity < 20) {
-      setState(() {
-        productQuantity++;
-      });
-    }
-  }
+  void updateProductPrice(int newQuantity) {
+    CartScreenInherited.of(context)?.updatePricesAndQuantitiesMap(
+      widget.productCard.id,
+      widget.productCard.price,
+      newQuantity,
+    );
 
-  void decreaseAmountProduct() {
-    if (productQuantity > 1) {
-      setState(() {
-        productQuantity--;
-      });
-    }
+    setState(() {
+      productQuantity = newQuantity;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    final double productPrice = double.parse(widget.price);
-    final price = productPrice * productQuantity;
-    final String formattedPrice = formatToReal(price);
+    final double totalProductPrice = widget.productCard.price * productQuantity;
+    final String formattedPrice = formatToReal(totalProductPrice);
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -54,8 +54,7 @@ class _PriceQuantitySelectorWidgetState
         ),
         ProductQuantityPickerWidget(
           productQuantity: productQuantity,
-          increaseAmountProduct: increaseAmountProduct,
-          decreaseAmountProduct: decreaseAmountProduct,
+          updateProductPrice: updateProductPrice,
         ),
       ],
     );
