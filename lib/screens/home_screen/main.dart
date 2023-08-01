@@ -23,7 +23,9 @@ class _HomeScreenState extends State<HomeScreen> {
         title: "Power Tech",
         actionIcon: Icons.notifications,
         actionIconTooltip: "Notificações",
-        actionIconFunction: () {},
+        actionIconFunction: () {
+          Navigator.pushNamed(context, "notifications");
+        },
         scaffoldKey: _scaffoldKey,
       ),
       body: const SectionProducts(),

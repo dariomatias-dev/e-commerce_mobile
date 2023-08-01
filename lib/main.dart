@@ -6,6 +6,8 @@ import 'dart:convert';
 import 'package:power_tech/providers/user_preferences_inherited.dart';
 
 import 'package:power_tech/screens/main_screen/main.dart';
+import 'package:power_tech/screens/notifications_screen/main.dart';
+import 'package:power_tech/screens/search_screen/main.dart';
 
 import 'package:power_tech/services/api_services.dart';
 
@@ -96,6 +98,8 @@ class _MyAppState extends State<MyApp> {
         initialRoute: "/",
         routes: {
           "/": (context) => const MainScreen(),
+          "notifications": (context) => const NotificationsScreen(),
+          "search": (context) => const SearchScreen(),
         },
       ),
     );

@@ -26,7 +26,9 @@ class _WishlistScreenState extends State<WishlistScreen> {
         title: "Lista de desejos",
         actionIcon: Icons.search,
         actionIconTooltip: "Pesquisar",
-        actionIconFunction: () {},
+        actionIconFunction: () {
+          Navigator.pushNamed(context, "search");
+        },
         scaffoldKey: _scaffoldKey,
       ),
       body: FutureBuilder(

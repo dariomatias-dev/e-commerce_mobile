@@ -14,12 +14,11 @@ class PricesAndQuantitiesMapManager {
     this.setTotalOrderPrice,
     required this.context,
   });
-
-  final Map<String, PriceAndQuantityModel> pricesAndQuantitiesMap;
   final VoidCallback? setTotalOrderPrice;
   final BuildContext context;
 
   final APIServices apiServices = APIServices();
+  final Map<String, PriceAndQuantityModel> pricesAndQuantitiesMap;
 
   // Adds the new product to the cart in the variable pricesAndQuantitiesMap
   void addPriceAndQuantityMap(List<ProductCardModel> productCards) {

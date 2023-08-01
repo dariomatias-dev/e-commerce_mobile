@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+
+import 'package:power_tech/core/power_tech_text_styles.dart';
+
 import 'package:power_tech/widgets/custom_app_bar_widget/open_drawer_button_widget.dart';
 
 class CustomAppBarWidget extends StatelessWidget
@@ -32,10 +35,7 @@ class CustomAppBarWidget extends StatelessWidget
       centerTitle: true,
       title: Text(
         title,
-        style: const TextStyle(
-          color: Colors.black,
-          fontSize: 14,
-        ),
+        style: PowerTechTextStyles.appBarTitle,
       ),
       backgroundColor: Colors.white,
       actions: [
