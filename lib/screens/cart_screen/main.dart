@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'dart:developer' as developer;
 import 'dart:convert';
+
+import 'package:power_tech/managers/prices_and_quantities_map_manager.dart';
 
 import 'package:power_tech/models/price_and_quantity_model.dart';
 import 'package:power_tech/models/product_card_model.dart';
@@ -28,10 +29,10 @@ class CartScreen extends StatefulWidget {
 class _CartScreenState extends State<CartScreen> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   final APIServices apiServices = APIServices();
+
   ValueNotifier<List<ProductCardModel>?> productCards =
       ValueNotifier<List<ProductCardModel>?>(null);
 
-  List<String>? previousCartProductIds;
   Map<String, PriceAndQuantityModel> pricesAndQuantitiesMap = {};
   late double totalOrderPrice;
 
@@ -64,55 +65,14 @@ class _CartScreenState extends State<CartScreen> {
 
   // It will create a field in the object with the id of the product, inserting its price and quantity
   void setPricesAndQuantitiesMap(List<ProductCardModel> productCards) {
-    addPriceAndQuantityMap(productCards);
-    removePricesAndQuantitiesMap();
-
-    setTotalOrderPrice();
-  }
-
-  void addPriceAndQuantityMap(List<ProductCardModel> productCards) {
-    for (ProductCardModel productCard in productCards) {
-      if (!pricesAndQuantitiesMap.containsKey(productCard.id)) {
-        pricesAndQuantitiesMap[productCard.id] = PriceAndQuantityModel(
-          price: productCard.price,
-          quantity: 1,
-        );
-      }
-    }
-  }
-
-  // If the quantity is one, the product is withdrawn, otherwise it is added or updated.
-  void updatePricesAndQuantitiesMap(
-    String productId,
-    double price,
-    int quantity,
-  ) {
-    if (quantity == 1) {
-      pricesAndQuantitiesMap.remove(productId);
-    }
-
-    pricesAndQuantitiesMap[productId] = PriceAndQuantityModel(
-      price: price,
-      quantity: quantity,
+    final PricesAndQuantitiesMapManager pricesAndQuantitiesMapManager =
+        PricesAndQuantitiesMapManager(
+      pricesAndQuantitiesMap: pricesAndQuantitiesMap,
+      context: context,
     );
 
-    setTotalOrderPrice();
-  }
-
-  void removePricesAndQuantitiesMap() {
-    final List<String> cartProductIds =
-        UserPreferencesInherited.of(context)!.cartProductIds;
-    final List<String> mapKeys = pricesAndQuantitiesMap.keys.toList();
-
-    for (String key in mapKeys) {
-      if (!cartProductIds.contains(key)) {
-        pricesAndQuantitiesMap.remove(key);
-      }
-    }
-  }
-
-  void removePriceAndQuantityMap(String productId) {
-    pricesAndQuantitiesMap.remove(productId);
+    pricesAndQuantitiesMapManager.addPriceAndQuantityMap(productCards);
+    pricesAndQuantitiesMapManager.removePriceAndQuantityMap();
 
     setTotalOrderPrice();
   }
@@ -130,29 +90,6 @@ class _CartScreenState extends State<CartScreen> {
     });
   }
 
-  Future<void> removeAllProducts() async {
-    final UserPreferencesInherited userPreferencesInherited =
-        UserPreferencesInherited.of(context)!;
-
-    userPreferencesInherited.updateCartProductIds([]);
-
-    final Map<String, dynamic> body = {
-      "productIds": [],
-    };
-
-    try {
-      await apiServices.put(
-        "cart/57e99e52-753e-4da7-8a67-a6286edd2ee4",
-        body,
-      );
-    } catch (err) {
-      developer.log(
-        "An excess occurred: $err",
-        error: err,
-      );
-    }
-  }
-
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
@@ -161,13 +98,20 @@ class _CartScreenState extends State<CartScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final PricesAndQuantitiesMapManager pricesAndQuantitiesMapManager =
+        PricesAndQuantitiesMapManager(
+      pricesAndQuantitiesMap: pricesAndQuantitiesMap,
+      setTotalOrderPrice: setTotalOrderPrice,
+      context: context,
+    );
+
     return Scaffold(
       key: _scaffoldKey,
       appBar: CustomAppBarWidget(
         title: "Carrinho",
         actionIcon: Icons.remove_circle_outline,
         actionIconTooltip: "Remover tudo",
-        actionIconFunction: removeAllProducts,
+        actionIconFunction: pricesAndQuantitiesMapManager.removeAllProducts,
         scaffoldKey: _scaffoldKey,
       ),
       body: ValueListenableBuilder(
@@ -184,8 +128,10 @@ class _CartScreenState extends State<CartScreen> {
           return CartScreenInherited(
             totalOrderPrice: totalOrderPrice,
             pricesAndQuantitiesMap: pricesAndQuantitiesMap,
-            updatePricesAndQuantitiesMap: updatePricesAndQuantitiesMap,
-            removePriceAndQuantityMap: removePriceAndQuantityMap,
+            updatePricesAndQuantitiesMap:
+                pricesAndQuantitiesMapManager.updatePricesAndQuantitiesMap,
+            removePriceAndQuantityMap:
+                pricesAndQuantitiesMapManager.removePriceAndQuantityMapById,
             child: SingleChildScrollView(
               child: Column(
                 children: [
